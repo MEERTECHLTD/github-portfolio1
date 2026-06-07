@@ -1,0 +1,960 @@
+{
+ "projects": [
+  {
+   "slug": "document-intelligence-platform",
+   "name": "Document Intelligence Platform",
+   "tagline": "Document verification & generation backend with deterministic extraction, rule-based validation, and MCP agent integration",
+   "category": "Applied AI & Agents",
+   "stack": [
+    "Python 3.12",
+    "FastAPI",
+    "Celery",
+    "Redis",
+    "PostgreSQL",
+    "SQLAlchemy",
+    "Alembic",
+    "Next.js 15",
+    "TypeScript",
+    "Material-UI 6",
+    "React 18",
+    "TanStack Query",
+    "Docker",
+    "Uvicorn",
+    "asyncpg",
+    "pypdf",
+    "python-docx",
+    "pdf2image",
+    "pytesseract",
+    "Pillow",
+    "Jinja2",
+    "WeasyPrint",
+    "httpx",
+    "cryptography",
+    "pydantic",
+    "ruff",
+    "black",
+    "mypy",
+    "pytest"
+   ],
+   "aiCapabilities": [
+    "Rule-based document validation engine (invoices, receipts, letters) against external reference records — not LLM-based, fully deterministic",
+    "MCP connection registry enabling agents to integrate custom extraction/validation logic via HTTP probes with encrypted credentials",
+    "Agent orchestration ready: document processing pipelines exposed via REST API for agent-driven workflows"
+   ],
+   "observedSignals": [
+    "9 Alembic database migrations (auth, document processing, audit append-only triggers, validation runs, MCP connections)",
+    "50 test files with pytest covering auth, extraction (PDF/DOCX/image), validation rules, approval concurrency, RBAC, rate limiting, SSRF guards, virus scan, worker tasks, generation rendering, readiness checks",
+    "3-image Docker build pipeline (API, worker, web) with BuildKit cache + health checks; production-safety assertions on boot (secret validation, CORS, proxy settings)",
+    "GitHub Actions CI/CD (lint + typecheck + tests + image builds on every push/PR to main)"
+   ],
+   "depthAssessment": "substantial-system",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "agentic-wallets-for-ai-agents",
+   "name": "Agentic Wallets for AI Agents",
+   "tagline": "Autonomous AI agent wallets on Solana — programmatic key management, LLM-powered decisions, real on-chain trades.",
+   "category": "Applied AI & Agents",
+   "stack": [
+    "Node.js >=18 (ESM)",
+    "@solana/web3.js 1.98.0",
+    "@solana/spl-token 0.4.9",
+    "Anthropic Claude API",
+    "Jupiter DEX API v6",
+    "Express",
+    "WebSocket (ws)",
+    "AES-256-GCM (Node crypto)",
+    "Winston logging",
+    "Docker",
+    "bash/cli"
+   ],
+   "aiCapabilities": [
+    "Anthropic Claude API (claude-haiku-4-5-20251001) as production decision engine",
+    "Rule-based FSM fallback for offline/API-failure scenarios",
+    "Structured JSON prompting with system prompt injected constraints and safety rules",
+    "LLM decision validation and hard safety gates enforced post-LLM response"
+   ],
+   "observedSignals": [
+    "Multi-stage Dockerfile with non-root user and health checks",
+    "docker-compose.yml with volume persistence, health checks, service scaling (profiles: headless, demo, llm)",
+    "Automated test-suite.js with 7+ on-chain integration tests (wallet, balances, transfers, memos, enumeration)",
+    "Multi-agent harness supporting N concurrent agents with configurable duration and tick intervals"
+   ],
+   "depthAssessment": "substantial-system",
+   "isPrivate": false,
+   "repoUrl": "https://github.com/MEERTECHLTD/Agentic-Wallets-for-AI-Agents",
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "jigawa-agri-ai",
+   "name": "Jigawa Agri-AI",
+   "tagline": "Real-time GIS intelligence platform for government-scale agricultural command, security, and decision support across Nigerian state farms.",
+   "category": "Applied AI & Agents",
+   "stack": [
+    "TypeScript",
+    "Next.js 15",
+    "React 18",
+    "PostgreSQL + PostGIS",
+    "Prisma 5",
+    "NextAuth v5",
+    "Leaflet",
+    "Deck.gl",
+    "Radix UI",
+    "Tailwind CSS",
+    "Recharts",
+    "Zod",
+    "Zustand",
+    "TanStack Query",
+    "Vitest",
+    "Playwright",
+    "Pino",
+    "Prometheus",
+    "Docker",
+    "Docker Compose",
+    "GitHub Actions",
+    "Anthropic Claude SDK",
+    "Google Generative AI"
+   ],
+   "aiCapabilities": [
+    "Anthropic Claude SDK integration for streaming chat with farm context injection",
+    "Google Generative AI (Gemini) integration for AI assistant fallback"
+   ],
+   "observedSignals": [
+    "4-job GitHub Actions CI with typed typecheck, unit+e2e tests, multi-stage Docker build, and SSH deploy with Prisma migration recovery",
+    "13 migrations with rollback.sql and phased authorization shadow-testing (authz-shadow.test.ts) + gate/rollout verification scripts",
+    "Multi-tenant per-organization realtime event bus (EventEmitter, Redis-ready); in-process for single-instance, adapter pattern supports scaling",
+    "Bearer-token + rate-limited device telemetry ingestion (600 readings/min capacity per IP); batch and single-reading support with duplicate replay safety"
+   ],
+   "depthAssessment": "substantial-system",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "offgrid-remote-portal-orp",
+   "name": "Offgrid Remote Portal (ORP)",
+   "tagline": "Supabase-powered ERP for renewable-energy operations and off-grid mini-grid deployments",
+   "category": "Energy & Climate Infrastructure",
+   "stack": [
+    "TypeScript",
+    "React 18",
+    "Vite",
+    "Redux Toolkit",
+    "Material UI v5",
+    "Express.js",
+    "Node.js",
+    "Supabase Postgres 15",
+    "Supabase Auth",
+    "Supabase Storage",
+    "Supabase Realtime",
+    "PostGIS",
+    "pgvector",
+    "pg_partman",
+    "pg_cron",
+    "pgtap",
+    "Vercel",
+    "Google Cloud Run",
+    "Capacitor",
+    "Android",
+    "GitHub Actions",
+    "Pino (logging)",
+    "Zod (validation)",
+    "jose (JWT)",
+    "Anthropic Claude",
+    "Microsoft Graph",
+    "Zoho API",
+    "Google Drive API"
+   ],
+   "aiCapabilities": [
+    "Claude RAG + assistants (Anthropic API integration in api-v2)"
+   ],
+   "observedSignals": [
+    "66 sequential Supabase migrations with RLS hardening (0001–0070), 90+ policies (deny-by-default), audit.audit_log partitioned monthly via pg_partman",
+    "9 GitHub Actions workflows with multi-stage CI/CD: api-v2 Cloud Run deploy (min 1, max 10 instances), web build → Vercel, db migrations with pgTAP test suite, post-deploy verify (RBAC gates, §10 phase tracking), Android build",
+    "API-v2 Express server (Cloud Run): 6 domain routers (tasks, admin, auth, projects, requests, documents), JWT verification via JWKS, request-scoped Supabase clients, Zod schema validation, pino structured logging with request_id, rate limiting, CORS, Helmet security headers",
+    "Realtime channels (presence, typing, project activity, notifications) with Postgres logical replication on select tables; RLS-scoped row replication"
+   ],
+   "depthAssessment": "substantial-system",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "salcollect-field-verification-platform",
+   "name": "SalCollect — Field Verification Platform",
+   "tagline": "Mobile-first field data capture for solar installation claim verification in rural electrification programs.",
+   "category": "Energy & Climate Infrastructure",
+   "stack": [
+    "TypeScript",
+    "Next.js 16",
+    "React 19",
+    "Node.js",
+    "Prisma 6",
+    "PostgreSQL / SQLite",
+    "Material-UI 7",
+    "Leaflet (maps)",
+    "Recharts (charts)",
+    "JWT + bcrypt auth",
+    "TOTP MFA",
+    "React Hook Form + Zod"
+   ],
+   "aiCapabilities": [],
+   "observedSignals": [
+    "Multi-section form autosave + draft persistence",
+    "Append-only audit log on every mutating operation (AUDIT_ACTIONS.CREATE/UPDATE/DELETE tracked per user/role/IP)",
+    "Evidence SHA-256 integrity verification + hierarchical file storage per developer/site/module",
+    "RBAC enforced via requirePermission() middleware on all API routes; role-permissions matrix seeded at startup"
+   ],
+   "depthAssessment": "substantial-system",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "maizeguardai",
+   "name": "MaizeGuardAI",
+   "tagline": "CNN-powered maize crop disease detection for African smallholder farmers",
+   "category": "Applied AI & Agents",
+   "stack": [
+    "Python 3.8+",
+    "FastAPI",
+    "TensorFlow 2.4.1",
+    "Keras",
+    "React 18.3",
+    "TypeScript",
+    "Vite",
+    "Tailwind CSS",
+    "Lucide Icons",
+    "numpy",
+    "Pillow",
+    "scikit-learn"
+   ],
+   "aiCapabilities": [
+    "CNN-based image classification (Keras Sequential model)",
+    "Google Gemini API integration for conversational AI assistance",
+    "Disease classification: 5-class multiclass prediction on maize leaf images"
+   ],
+   "observedSignals": [
+    "CNN architecture defined in maize_fudma_model.json with 2 Conv2D blocks + MaxPooling + Flatten + Dense layers",
+    "Frontend dependency on openai and Gemini API integration for chat assistance",
+    "Modular React component structure (ImageUpload, DetectionResult, ChatInterface, DiseaseLibrary, FAQ, Resources, Blog)",
+    "FastAPI with CORS middleware for frontend-backend communication"
+   ],
+   "depthAssessment": "solid-product",
+   "isPrivate": false,
+   "repoUrl": "https://github.com/MEERTECHLTD/MaizeGuardAI",
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "exportflow-ai",
+   "name": "ExportFlow AI",
+   "tagline": "AI-powered pricing, compliance, and market intelligence for African agricultural exporters.",
+   "category": "Applied AI & Agents",
+   "stack": [
+    "TypeScript",
+    "React 18",
+    "Vite",
+    "React Router v6",
+    "Firebase (Auth, Firestore, Cloud Functions, Storage)",
+    "Anthropic Claude (Opus 4.6)",
+    "Fixer API",
+    "PDFKit",
+    "TanStack Query",
+    "Zustand",
+    "react-hook-form",
+    "Zod",
+    "Recharts",
+    "shadcn/ui",
+    "Tailwind CSS",
+    "Vitest",
+    "Playwright",
+    "Firebase Emulator Suite"
+   ],
+   "aiCapabilities": [
+    "Claude Opus 4.6 (server-side via Cloud Functions)",
+    "Structured-output JSON prompts for cost estimation, compliance checklists, pricing intelligence, natural language parsing, and document extraction",
+    "Per-function rate limiting (20–30/hour) with schema validation (Zod) and graceful mock-data fallback"
+   ],
+   "observedSignals": [
+    "Deterministic pricing engine isolated as pure function, fully unit-tested (5 test cases in calculator.test.ts), and mirrored server-side to prevent tampering.",
+    "Rate-limited Claude calls (30/hour for smart-fill and pricing intel, 20/hour for doc extraction) with structured-output schema validation (Zod) and graceful fallbacks when ANTHROPIC_API_KEY is unset.",
+    "Multi-tenant RBAC enforced server-side via firestore.rules (5 roles with granular document-level permissions), not just UI gates.",
+    "Live FX integration (Fixer) with cross-rate computation for non-EUR pairs (free-tier constraint) and hourly scheduled refresh via fxScheduledRefresh()."
+   ],
+   "depthAssessment": "solid-product",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "clearmind",
+   "name": "ClearMind",
+   "tagline": "AI-powered offline-first productivity app with enterprise project management, built in React 19 + Firebase",
+   "category": "Developer Tooling & Productivity",
+   "stack": [
+    "TypeScript",
+    "React 19",
+    "Vite 6.2",
+    "Firebase 12.7 (Auth + Firestore)",
+    "Google Gemini AI API",
+    "IndexedDB",
+    "Tailwind CSS",
+    "Recharts",
+    "Lucide React",
+    "PWA (Service Workers)",
+    "Vercel"
+   ],
+   "aiCapabilities": [
+    "Google Gemini AI for task/goal/project generation and command parsing",
+    "Iris AI companion (conversational assistance with user context)",
+    "Rant Corner AI support for emotional acknowledgment"
+   ],
+   "observedSignals": [
+    "17+ lazy-loaded view components with code splitting per app.tsx",
+    "IndexedDB schema with 17 stores (projects, tasks, notes, habits, goals, milestones, daily logs, rants, events, daily mapper, applications, iris conversations, learning resources)",
+    "Centralized IndexedDB-Firestore collection mapping (canonical source in db.ts) ensuring sync consistency",
+    "Soft-delete + 30-day cleanup strategy for safe deletion across local/cloud"
+   ],
+   "depthAssessment": "solid-product",
+   "isPrivate": false,
+   "repoUrl": "https://github.com/MEERTECHLTD/ClearMind",
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "ranawallet",
+   "name": "RanaWallet",
+   "tagline": "Multi-tenant utility-payment platform: offline-first mobile app + production FastAPI backend for energy vending across African rural & urban markets",
+   "category": "Energy & Climate Infrastructure",
+   "stack": [
+    "Expo 54 / React Native 0.81 / React 19",
+    "FastAPI (async, Python 3.12) / SQLAlchemy 2",
+    "PostgreSQL 17",
+    "Redis 7",
+    "Next.js (operator web app)",
+    "TypeScript / React Query",
+    "NativeWind (TailwindCSS on React Native)",
+    "Alembic (schema-per-tenant migrations)",
+    "Docker Compose",
+    "Flutterwave (payments)",
+    "BuyPower (urban electricity vending)",
+    "RESCO / mock providers (rural)",
+    "pnpm 9.12",
+    "Vitest (mobile tests)",
+    "pytest (backend tests)",
+    "Expo EAS (builds)",
+    "GitHub Actions (CI/CD)"
+   ],
+   "aiCapabilities": [],
+   "observedSignals": [
+    "Schema-per-tenant multi-tenancy with shared Postgres + schema_translate_map for zero-copy isolation",
+    "Double-entry ledger with `post_journal` atomic write path (refuses unbalanced journals); chart of accounts enforces Decimal precision throughout",
+    "Idempotent vend & fund endpoints via Idempotency-Key header + deterministic reference generation (no replay-able double-charges)",
+    "Pluggable electricity provider registry (BuyPower, RESCO, mock) with circuit-breaker + error-mapping service"
+   ],
+   "depthAssessment": "solid-product",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "mini-grid-monitoring-management-platform",
+   "name": "Mini-Grid Monitoring & Management Platform",
+   "tagline": "Real-time dashboard and control system for off-grid solar installations with multi-provider support",
+   "category": "Energy & Climate Infrastructure",
+   "stack": [
+    "Node.js 18/20",
+    "Express 5.1.0",
+    "TypeScript 5.7",
+    "React 18.3",
+    "Vite 5.4",
+    "TailwindCSS 3.4",
+    "Redux Toolkit 2.5",
+    "CoreUI 5.9 (admin panel)",
+    "Recharts 2.15 (charting)",
+    "InfluxDB 5.3 (time-series storage, optional)",
+    "MQTT.js 5.11 (Victron VRM)",
+    "Primus 8.0 (WebSocket)",
+    "Axios 1.7 (HTTP client)",
+    "Webpack 5.101",
+    "Docker",
+    "Nginx (reverse proxy)",
+    "PM2 (process manager)",
+    "GitHub Actions (CI/CD)"
+   ],
+   "aiCapabilities": [],
+   "observedSignals": [
+    "Dual-provider data aggregation: Victron MQTT (Venus) and TBB NOVA (HMAC-SHA256 authenticated HTTP) with pluggable provider types in frontend data models",
+    "Production authentication layer: session token generation with 24h expiry and in-memory revocation in Express server; multi-key VRM credential storage capped at 3 tokens",
+    "Rate-limited TBB integration: enforces 2 requests per 3 seconds with exponential backoff, HMAC signature generation, and comprehensive error handling (401, 403, 404, 422, 429, 500)",
+    "CI/CD pipeline: GitHub Actions build stage compiles both backend (TypeScript to CommonJS) and frontend (Vite), SCP deployment to DigitalOcean, nginx reload, PM2 service restart in single workflow"
+   ],
+   "depthAssessment": "solid-product",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "aloha-wallet",
+   "name": "ALOHA Wallet",
+   "tagline": "Prepaid electricity token vending & revenue collection for Nigerian energy markets",
+   "category": "Fintech & Payments",
+   "stack": [
+    "TypeScript 5",
+    "React 18.3",
+    "Vite 7",
+    "Tailwind CSS 3",
+    "shadcn/ui + Radix UI",
+    "Supabase",
+    "Postgres",
+    "PL/pgSQL",
+    "Deno",
+    "Vercel",
+    "BellBank BAAS",
+    "Termii SMS",
+    "Wisdom STS",
+    "TanStack Query 5",
+    "Zod validation"
+   ],
+   "aiCapabilities": [],
+   "observedSignals": [
+    "30+ migrations from 2025-10 to 2026-05 showing active hardening (RLS lockdown, double-entry ledger foundation, BVN encryption pgcrypto, audit immutability)",
+    "5-phase CI workflow: SPA lint/typecheck/test, Edge Functions deno check, migrations destructive-SQL gate, bundle size <1MB gzipped, smoke probes hourly",
+    "Strict CSP headers in Vercel config + HSTS + X-Frame-Options DENY",
+    "Webhook idempotency via UNIQUE constraint on bellbank_reference + is_duplicate_webhook RPC"
+   ],
+   "depthAssessment": "solid-product",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "nigeria-music-analytics-system-nmas",
+   "name": "Nigeria Music Analytics System (NMAS)",
+   "tagline": "Chartmetric-first data platform tracking 131 Nigerian artists across 15+ platforms for government economic reporting",
+   "category": "Platforms & SaaS",
+   "stack": [
+    "Python 3.13",
+    "FastAPI 0.111",
+    "SQLModel / SQLAlchemy 2.0",
+    "Alembic (migrations)",
+    "Chartmetric API (primary data source)",
+    "React 18",
+    "TypeScript 5.5",
+    "Vite 5.4",
+    "Tailwind CSS",
+    "Recharts"
+   ],
+   "aiCapabilities": [],
+   "observedSignals": [
+    "Alembic migration schema with 11+ tables (artists, tracks, extraction_jobs, job_runs, normalized_metric_observations, raw_api_payloads, methodology_entries, coverage_gaps, limitation_flags, etc.), unique constraints on Chartmetric entity IDs, foreign keys, JSON columns for flexible metadata",
+    "Stateless job orchestration with ExtractionJob (cadence + period + variable scope) and JobRun (status + checkpoint + attempt tracking) supporting pause/resume/retry",
+    "Chartmetric client with configurable auth (static token OR refresh flow), request throttle (1s default), exponential backoff (2s × 3 retries), verification of 26+ endpoints as of 2026-04-04",
+    "Quarterly aggregation engine grouping observations by entity/platform/period, applying metric-specific rules (net_change, sum, last_value, fallback), computing QoQ and YoY change"
+   ],
+   "depthAssessment": "solid-product",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": true
+  },
+  {
+   "slug": "solar-minigrid-ecosystem-calculator",
+   "name": "Solar Minigrid Ecosystem Calculator",
+   "tagline": "Professional engineering tools for solar minigrid design and energy storage system sizing",
+   "category": "Energy & Climate Infrastructure",
+   "stack": [
+    "TypeScript",
+    "React 18",
+    "Vite",
+    "shadcn-ui",
+    "Tailwind CSS",
+    "Capacitor 7",
+    "React Hook Form",
+    "Zod (validation)",
+    "Lucide React (icons)"
+   ],
+   "aiCapabilities": [],
+   "observedSignals": [
+    "Two specialized calculator modules with full input validation and error handling",
+    "Capacitor integration (iOS/Android support via package.json dependencies @capacitor/core@^7.4.3, @capacitor/ios@^7.4.3, @capacitor/android@^7.4.3)",
+    "Professional UI with Cards, Tabs, Tooltips, and formatted result display from shadcn/ui",
+    "Form-driven state management with React Hook Form and Zod validation"
+   ],
+   "depthAssessment": "functional-app",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": false
+  },
+  {
+   "slug": "powertoken-gateway",
+   "name": "PowerToken Gateway",
+   "tagline": "STS electricity prepayment token vending UI for Nigerian power meters",
+   "category": "Energy & Climate Infrastructure",
+   "stack": [
+    "TypeScript",
+    "React 18",
+    "Vite",
+    "React Router",
+    "Tailwind CSS",
+    "shadcn/ui",
+    "Radix UI",
+    "Axios",
+    "React Hook Form",
+    "React Query",
+    "Zod",
+    "Recharts"
+   ],
+   "aiCapabilities": [],
+   "observedSignals": [
+    "Lovable scaffolding signature (lovable-tagger plugin in devDependencies; Lovable-generated HTML meta tags)",
+    "Form validation on meter number, amount, and email fields",
+    "Axios integration for RESTful API calls to backend payment endpoints",
+    "React Router for multi-route navigation (/, /payment-status)"
+   ],
+   "depthAssessment": "functional-app",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": false
+  },
+  {
+   "slug": "victron-mqtt-prometheus-monitoring-pipeline",
+   "name": "Victron MQTT→Prometheus Monitoring Pipeline",
+   "tagline": "Drop-in Docker telemetry exporter for Victron GX energy systems — replaces Node-RED with direct MQTT-to-Prometheus pipeline.",
+   "category": "Energy & Climate Infrastructure",
+   "stack": [
+    "Python 3.9",
+    "Docker Compose v2",
+    "Prometheus",
+    "Grafana",
+    "paho-mqtt",
+    "prometheus_client"
+   ],
+   "aiCapabilities": [],
+   "observedSignals": [
+    "Multi-service Docker Compose with host networking for local device access",
+    "5-second Prometheus scrape interval for real-time energy monitoring",
+    "Prometheus datasource auto-provisioned in Grafana via YAML",
+    "Container restart policy (unless-stopped) for reliability"
+   ],
+   "depthAssessment": "functional-app",
+   "isPrivate": false,
+   "repoUrl": "https://github.com/MEERTECHLTD/victron-monitoring-no-nodered",
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": false
+  },
+  {
+   "slug": "biz-track",
+   "name": "Biz Track",
+   "tagline": "Offline-first mobile sales & inventory for Nigerian SMEs with SQLite + Supabase cloud sync",
+   "category": "Fintech & Payments",
+   "stack": [
+    "React Native 0.81",
+    "Expo 54",
+    "TypeScript",
+    "React 19",
+    "Zustand",
+    "expo-sqlite",
+    "@supabase/supabase-js",
+    "@tanstack/react-query",
+    "@trpc/react-query",
+    "Drizzle ORM",
+    "React Hook Form + Zod",
+    "NativeWind",
+    "expo-notifications",
+    "expo-background-fetch",
+    "Express",
+    "Vitest"
+   ],
+   "aiCapabilities": [],
+   "observedSignals": [
+    "Local-first SQLite with 5-table schema + indexes and foreign keys (businesses ↔ products, sales ↔ sale_items)",
+    "Sync queue processor with exponential backoff retry logic (1s → 2s → 4s → 8s → 16s, capped 30s, max 5 attempts)",
+    "Background sync via TaskManager every 15 min + manual foreground sync trigger",
+    "5 Zustand stores (auth, business, product, sales, sync) persisted to AsyncStorage"
+   ],
+   "depthAssessment": "functional-app",
+   "isPrivate": true,
+   "repoUrl": null,
+   "demoUrl": null,
+   "confidence": "high",
+   "featured": false
+  }
+ ],
+ "bio": {
+  "heroTagline": "Production AI, energy & fintech systems — built for Africa",
+  "heroSubhead": "I'm an AI systems engineer and founder building backend infrastructure for African markets — off-grid energy monitoring, multi-tenant payment rails, and applied-AI systems with real safety gates.",
+  "shortBio": "I'm Mahmud Madobi, an AI systems engineer and founder of Meertech Ltd in Abuja. I build production backends and applied-AI systems for the problems around me: keeping off-grid power running, moving money reliably, and putting useful AI in front of people who'd otherwise never touch it. I care about systems that survive contact with the real world.",
+  "founderBio": "Mahmud Madobi is the founder and CEO of Meertech Ltd, an Abuja-based engineering company building production software for energy access, fintech, and applied AI across African markets. He works at the systems layer: multi-tenant payment platforms with double-entry ledgers, off-grid energy monitoring and vending infrastructure, and autonomous AI-agent tooling. His portfolio spans renewable-energy ERP, utility-payment apps shipped to production, and government-scale agricultural intelligence — built fast with modern AI-assisted workflows, but engineered with the discipline of someone who has to keep them running. A computer science graduate with Huawei HCIA-AI certification and ALX Software Engineering training, he is part of a wave of African deep-tech founders building globally competitive infrastructure from the continent up.",
+  "technicalBio": "Mahmud Madobi (Sani Mahmud Madobi) is a backend and AI systems engineer building production infrastructure across a TypeScript-heavy, Postgres-centric stack (roughly 60% TypeScript, 26% Python across 90+ repositories). His work runs deep at the systems layer: a multi-tenant utility-payment platform on FastAPI and PostgreSQL with schema-per-tenant isolation and an atomic double-entry ledger that refuses unbalanced journals, fronted by an offline-first Expo/React Native app with transaction queueing and biometric auth (123 passing tests, production-deployed via Docker Compose). For a renewable-energy operator he led a Firebase-to-Supabase migration hardened by 66 sequential RLS migrations, 90+ deny-by-default policies, and 9 GitHub Actions CI/CD workflows with Cloud Run autoscaling and pgTAP gates. He has built fail-closed document-processing pipelines with MCP agent integration, autonomous on-chain agent wallets driven by an Anthropic Claude decision engine with hard safety gates, dual-provider solar-monitoring with HMAC-authenticated telemetry, and field-verification platforms with SHA-256 evidence integrity and append-only audit logs for a donor-funded electrification program. BSc Computer Science; ALX Software Engineering; Huawei HCIA-AI.",
+  "oneLiner": "AI systems engineer and founder of Meertech Ltd, building production AI, energy-access, and fintech infrastructure from Abuja, Nigeria."
+ },
+ "skills": [
+  {
+   "name": "AI Agents & LLM Systems",
+   "skills": [
+    "Anthropic Claude API integration",
+    "Google Gemini / Generative AI integration",
+    "RAG (retrieval-augmented generation)",
+    "MCP (Model Context Protocol) connection registry",
+    "Structured-output JSON prompting with Zod schema validation",
+    "LLM safety gates & hard constraints (max-tx caps, balance floors)",
+    "Dual decision engines (rule-based FSM + LLM)",
+    "Dual AI provider routing with fallback",
+    "Per-function LLM rate limiting",
+    "Agent-driven development workflows (.claude/agents)"
+   ],
+   "rationale": "Agentic Wallets (Claude haiku-4-5 decision engine + FSM fallback + post-LLM safety gates), ExportFlow AI (5 Claude Opus capabilities, 20-30/hr rate limits), Document Intelligence (MCP registry over HTTP), Jigawa Agri-AI (Claude+Gemini fallback routing), ALOHA Wallet (17 .claude/agents)."
+  },
+  {
+   "name": "AI & Machine Learning",
+   "skills": [
+    "CNN image classification (Keras Sequential, Conv2D/MaxPooling/Dense)",
+    "TensorFlow 2.x / Keras model training & inference",
+    "Multiclass leaf-disease detection",
+    "Deterministic rule-based intelligence engines",
+    "Agronomic ruleset modeling (crop/soil/water/irrigation matrix)",
+    "Heuristic weighted-composite risk scoring",
+    "scikit-learn / numpy / Pillow preprocessing",
+    "FastAPI model-serving for inference"
+   ],
+   "rationale": "MaizeGuardAI (5-class CNN in maize_fudma_model.json, 95.35% reported accuracy, FastAPI inference), Jigawa Agri-AI (10-crop deterministic agronomic rubric), SalCollect (configurable weighted risk-scoring engine, no ML), MIDS Dynamics CV (predictive ML, feature engineering, model training)."
+  },
+  {
+   "name": "Backend Engineering",
+   "skills": [
+    "FastAPI (async, Python 3.12/3.13)",
+    "Express.js / Node.js APIs",
+    "SQLAlchemy 2 / SQLModel",
+    "Celery + Redis task queues",
+    "Async service layers (asyncio.to_thread for blocking I/O)",
+    "Schema-per-tenant multi-tenancy",
+    "Org-scoped multi-tenancy with Principal context",
+    "Pluggable provider registries with circuit breakers",
+    "Request-scoped database clients"
+   ],
+   "rationale": "RanaWallet (async FastAPI + SQLAlchemy 2, schema-per-tenant, provider registry w/ circuit breaker), Document Intelligence (FastAPI + Celery + Redis, org-scoped Principal, asyncio.to_thread), ORP api-v2 (Express on Cloud Run, request-scoped Supabase clients), NMAS (FastAPI + SQLModel)."
+  },
+  {
+   "name": "API Engineering",
+   "skills": [
+    "RESTful API design with OpenAPI docs",
+    "Idempotency-Key endpoints (deterministic references)",
+    "JWT verification via JWKS",
+    "JWT refresh rotation with jti denylist",
+    "Zod / Pydantic schema validation",
+    "Rate limiting & request throttling",
+    "Webhook idempotency (UNIQUE constraint guards)",
+    "CORS / Helmet security headers",
+    "Correlation IDs & request tracing"
+   ],
+   "rationale": "RanaWallet (idempotent vend/fund via Idempotency-Key, JWT refresh+jti denylist), ORP api-v2 (JWKS verify, Zod, rate limiting, Helmet, request_id), Document Intelligence (OpenAPI, correlation IDs), ALOHA Wallet (webhook idempotency via UNIQUE on bellbank_reference)."
+  },
+  {
+   "name": "Data & Databases",
+   "skills": [
+    "PostgreSQL 15/17 schema design",
+    "PostGIS spatial data",
+    "pgvector (HNSW vector search)",
+    "Double-entry ledger design (atomic balanced journals)",
+    "Alembic / Prisma / Drizzle migrations",
+    "Row-level partitioning (pg_partman, monthly audit logs)",
+    "pg_cron scheduled jobs",
+    "Redis 7 caching",
+    "InfluxDB time-series storage",
+    "SQLite (offline-first, local-first schemas)",
+    "SECURITY DEFINER RPCs with pinned search_path"
+   ],
+   "rationale": "ORP (66 sequential migrations, PostGIS+pgvector, pg_partman monthly audit, 95 tables/6 schemas), RanaWallet (post_journal atomic double-entry, Alembic), ALOHA Wallet (RPC-only wallet writes), Jigawa (Prisma+PostGIS), Mini-Grid (InfluxDB), Biz Track (SQLite 5-table schema)."
+  },
+  {
+   "name": "Cloud & DevOps / CI-CD",
+   "skills": [
+    "GitHub Actions multi-stage CI/CD",
+    "Docker multi-stage builds (non-root, BuildKit cache)",
+    "Docker Compose multi-service orchestration",
+    "Google Cloud Run (autoscaling 1-10 instances)",
+    "Vercel deployments",
+    "DigitalOcean deployment (SCP / single-droplet)",
+    "Nginx reverse proxy",
+    "PM2 process management",
+    "Expo EAS builds (APK/AAB, OTA)",
+    "pgTAP / pytest / Vitest CI gates",
+    "Health checks & post-deploy verification gates"
+   ],
+   "rationale": "ORP (9 GitHub Actions workflows, Cloud Run 1-10 autoscale, Vercel, pgTAP gates), RanaWallet (12-service Compose on DigitalOcean, EAS builds), Document Intelligence (3-image Docker w/ BuildKit), Mini-Grid (GitHub Actions to DigitalOcean, Nginx+PM2)."
+  },
+  {
+   "name": "Security & Reliability",
+   "skills": [
+    "RLS deny-by-default policy hardening (90+ policies)",
+    "RBAC (multi-role permission matrices, server-enforced)",
+    "AES-256-GCM encryption",
+    "Fernet (AES-128-CBC + HMAC-SHA256) at-rest encryption",
+    "pgcrypto field encryption (BVN)",
+    "PBKDF2 key derivation (210k iterations, OWASP)",
+    "CSP / HSTS / X-Frame-Options security headers",
+    "SSRF protection (loopback/private-range blocking)",
+    "TOTP MFA + account lockout",
+    "SHA-256 evidence integrity verification",
+    "Append-only audit logging",
+    "Documented security audits & remediation"
+   ],
+   "rationale": "ORP (90+ deny-by-default RLS, dual-surface RBAC, documented 2026-04-28 audit), Agentic Wallets (AES-256-GCM, PBKDF2 210k), Document Intelligence (Fernet, SSRF guards, append-only audit), ALOHA Wallet (pgcrypto BVN, CSP/HSTS), SalCollect (TOTP MFA, lockout, SHA-256 evidence)."
+  },
+  {
+   "name": "Observability",
+   "skills": [
+    "Prometheus metrics",
+    "Grafana dashboards",
+    "Loki log aggregation",
+    "Structured logging (Pino, structlog JSON, Winston)",
+    "Request-scoped log context (request_id)",
+    "Health & readiness probes (DB/Redis/storage)",
+    "Correlation IDs for request tracing",
+    "MQTT-to-Prometheus telemetry pipelines"
+   ],
+   "rationale": "Jigawa Agri-AI (Pino + Prometheus), RanaWallet (Prometheus/Grafana/Loki + structlog), Document Intelligence (readiness probes, correlation IDs), Victron pipeline (MQTT->Prometheus exporter, 5s scrape), Agentic Wallets (Winston)."
+  },
+  {
+   "name": "Mobile Engineering (Expo / React Native)",
+   "skills": [
+    "Expo 54 / React Native 0.81 / React 19",
+    "Offline-first architecture (SQLite + sync queue)",
+    "Exponential-backoff cloud sync (AsyncStorage queue)",
+    "Background sync via TaskManager",
+    "Biometric auth & expo-secure-store",
+    "Expo Router (typed routes)",
+    "NativeWind (Tailwind on native)",
+    "Capacitor (iOS/Android wrapping)",
+    "EAS build & OTA delivery",
+    "Push notifications (expo-notifications)"
+   ],
+   "rationale": "RanaWallet (Expo 54/RN 0.81/React 19, offline queue, biometric, secure-store, EAS), Biz Track (SQLite offline-first, exp-backoff sync 1s->30s, TaskManager 15min, expo-notifications), Solar Calculator (Capacitor iOS/Android)."
+  },
+  {
+   "name": "Frontend Systems",
+   "skills": [
+    "React 18/19 + TypeScript",
+    "Vite build tooling",
+    "Redux Toolkit / Zustand state",
+    "TanStack Query (server state)",
+    "Tailwind CSS + shadcn/ui + Radix UI",
+    "Material UI / CoreUI admin panels",
+    "Recharts data visualization",
+    "PWA (service workers, IndexedDB, offline-first)",
+    "Code-splitting & lazy-loaded views",
+    "Dark mode theming",
+    "Excel/CSV import-export (XLSX)"
+   ],
+   "rationale": "ClearMind (17 lazy-loaded views, IndexedDB 17 stores, PWA service worker, XLSX), ORP (React 18 + Redux Toolkit + MUI v5), PowerToken (shadcn/Radix 40+ primitives, dark mode), Mini-Grid (CoreUI admin + Recharts), NMAS (React + Tailwind admin console)."
+  },
+  {
+   "name": "Payments & Fintech",
+   "skills": [
+    "Flutterwave payment integration",
+    "BellBank BaaS virtual accounts (creation -> webhook -> credit)",
+    "Paystack subscriptions + webhooks",
+    "STS prepaid electricity token vending",
+    "BuyPower urban electricity vending",
+    "Wisdom STS client (RSA-1024 PKCS#1v1.5 auth)",
+    "Idempotent vend & fund flows (replay-safe)",
+    "Double-entry ledger & wallet RPCs (safe_credit/safe_debit/refund)",
+    "Verified-settlement guards",
+    "Live FX integration (Fixer cross-rate computation)"
+   ],
+   "rationale": "RanaWallet (Flutterwave top-ups, idempotent vend/fund, BuyPower vending), ALOHA Wallet (BellBank virtual-account flow, Wisdom STS RSA auth, RPC wallet writes), ExportFlow AI (Paystack subscriptions, Fixer FX), PowerToken & ORP (STS token vending)."
+  },
+  {
+   "name": "Energy & IoT Systems",
+   "skills": [
+    "Victron VRM / Venus MQTT integration",
+    "TBB NOVA HMAC-SHA256 authenticated HTTP client",
+    "MQTT telemetry ingestion (paho-mqtt, MQTT.js)",
+    "Rate-limited device APIs (exponential backoff)",
+    "Bearer-token device telemetry ingestion",
+    "Solar minigrid sizing (ILR, design factor, ESS capacity)",
+    "Renewable-energy ERP / off-grid operations",
+    "Time-series energy metrics (SOC, solar yield, AC load)",
+    "kWh unit conversion & metric labeling"
+   ],
+   "rationale": "Mini-Grid Platform (Victron MQTT + TBB NOVA HMAC-SHA256, 2-req/3s throttle, exp backoff), Victron pipeline (paho-mqtt exporter, 7 D-Bus metrics, kWh conversion), Jigawa (bearer-token telemetry 600 readings/min), Solar Calculator (ILR/design-factor/ESS sizing), ORP (renewable-energy ERP)."
+  },
+  {
+   "name": "Realtime & Geospatial Systems",
+   "skills": [
+    "Supabase Realtime (presence, typing, activity channels)",
+    "Postgres logical replication (RLS-scoped rows)",
+    "WebSocket push (Primus, ws)",
+    "Server-Sent Events (SSE) sync",
+    "PostGIS spatial queries",
+    "Leaflet + Deck.gl mapping",
+    "Esri / MODIS tile layers",
+    "Geo-tagged evidence capture & zone-based access",
+    "Per-organization realtime event bus (EventEmitter, Redis-ready)"
+   ],
+   "rationale": "ORP (Supabase Realtime channels + logical replication), Jigawa Agri-AI (Leaflet+Deck.gl, Esri/MODIS tiles, per-org event bus), Mini-Grid (Primus WebSocket broadcast), SalCollect (SSE inspection sync, geo-tagged evidence, zone access), Agentic Wallets (EventEmitter)."
+  }
+ ],
+ "narrative": {
+  "engineeringPhilosophy": "I build for the environments most software ignores: intermittent power, unreliable networks, and users who can't afford a system that loses their money or their data. That constraint shapes every decision. State lives locally first and reconciles when it can — SQLite queues with exponential backoff in Biz Track and RanaWallet, IndexedDB-to-cloud sync in ClearMind. Money paths are made un-replayable before they're made fast: double-entry ledgers that refuse unbalanced journals, idempotency keys, RPC-only wallet writes. Security is deny-by-default, not bolted on — RLS policies, fail-closed extraction, SSRF guards. I treat AI as a component inside a deterministic envelope, never the source of truth: hard safety gates validate every model decision after the fact. I ship fast with AI scaffolding, then earn altitude with migrations, tests, and CI gates.",
+  "researchInterests": [
+   {
+    "title": "Applied AI for Emerging Markets",
+    "blurb": "Building AI systems for African contexts where the constraints are real: government-scale agricultural intelligence (Jigawa Agri-AI), CNN crop-disease detection for smallholder farmers (MaizeGuardAI), and Chartmetric-driven music-industry analytics delivered to a national statistics agency (NMAS). The interesting problems aren't the models — they're data sparsity, low-connectivity delivery, and making machine output auditable by domain experts who don't trust black boxes."
+   },
+   {
+    "title": "Energy-Access & Off-Grid Infrastructure",
+    "blurb": "The largest cluster of my work: ERP and monitoring for mini-grid deployments (Offgrid Remote Portal, Mini-Grid Monitoring Platform), STS prepaid-token vending for Nigerian meters (PowerToken, ALOHA, RanaWallet), and direct Victron MQTT-to-Prometheus telemetry at the edge. I'm interested in the full stack of rural electrification — from hardware telemetry and provider integrations to the payment rails and field-verification workflows that make mini-grids financially viable."
+   },
+   {
+    "title": "Offline-First & Edge-Resilient Systems",
+    "blurb": "Designing software that assumes the network will fail. Local-first SQLite with sync queues and exponential-backoff retry (Biz Track, RanaWallet), IndexedDB plus PWA service workers with last-write-wins reconciliation (ClearMind), and lean edge exporters that run on-device. The research question I keep returning to: how do you give a user strong correctness guarantees — no double-charges, no lost writes — on a connection that drops every few minutes?"
+   },
+   {
+    "title": "Agentic AI with Hard Safety Envelopes",
+    "blurb": "Autonomous and tool-using agents constrained by deterministic guardrails. Agentic Wallets pairs an Anthropic Claude decision engine with a rule-based FSM fallback and post-LLM safety gates (per-transaction caps, balance floors enforced after the model responds). Document Intelligence exposes an MCP connection registry with SSRF-guarded, encrypted-credential probes. The principle: the model proposes, deterministic code disposes — agents never get unchecked authority over money or irreversible actions."
+   },
+   {
+    "title": "Trustworthy & Secure-by-Construction Backends",
+    "blurb": "Treating correctness, auditability, and least-privilege as architectural primitives. Deny-by-default Postgres RLS with SECURITY DEFINER helpers (ORP), append-only audit logs and SHA-256 evidence integrity (SalCollect, Document Intelligence), fail-closed extraction that never reports partial work as success, and double-entry ledgers that reject unbalanced journals. I'm drawn to systems where invalid states are unrepresentable rather than caught after the fact."
+   }
+  ],
+  "aiSafetyStatement": "Safe and trustworthy AI is a working principle in how I build, not a research claim I'd inflate. When I put an LLM in a production path, I wrap it in a deterministic envelope: hard safety gates that validate model output after the fact (transaction caps and balance floors enforced post-decision in Agentic Wallets), rule-based fallbacks for when the API is unavailable, and structured-output schemas with graceful degradation when keys are unset. I keep AI out of the system of record — ledgers, RBAC, and audit trails stay deterministic and auditable. My interest is making model-driven systems honest: legible to the domain experts who rely on them, and incapable of unchecked irreversible action.",
+  "sectionIntros": {
+   "projects": "Production systems shipped fast, then hardened — energy infrastructure, fintech rails, and applied AI built for African markets. Each entry is backed by real code: migrations, CI pipelines, tests, and deployment configs.",
+   "skills": "The stack I actually ship with — TypeScript and Python heavy, Postgres/Supabase for data, FastAPI and Express for services, React Native and Expo for offline-first mobile, Docker and GitHub Actions for delivery.",
+   "experience": "From backend and AI engineering roles into founding Meertech — building production software for energy access, fintech, and applied AI across Nigeria and the wider African market.",
+   "contact": "Open to serious collaboration on AI, energy, and infrastructure systems. Based in Abuja, Nigeria — building for global standards from the ground up."
+  }
+ },
+ "experience": [
+  {
+   "title": "Founder & CEO / Principal Engineer",
+   "org": "Meertech Ltd",
+   "period": "2024 – Present",
+   "location": "Abuja, Nigeria",
+   "bullets": [
+    "Founded and lead an engineering company shipping production software across energy access, fintech, and applied AI for Nigerian and African markets — owning architecture, delivery, and security across a portfolio of full-stack and backend systems (TypeScript and Python dominant; Postgres/Supabase, FastAPI, Next.js, Expo/React Native).",
+    "Delivered a full Firebase-to-Supabase production migration for a renewable-energy operations ERP, moving live identity, organizations, projects, and RBAC data onto Postgres and validating it with live smoke tests against real user accounts; hardened access with deny-by-default RLS policies and SECURITY DEFINER helpers pinned to a trusted search_path.",
+    "Built a multi-tenant utility-payment platform (FastAPI, schema-per-tenant Postgres, offline-first Expo mobile app) with an atomic double-entry ledger that refuses unbalanced journals and idempotent vend/fund endpoints that prevent replay double-charges; integrated real electricity-vending and payment providers behind a pluggable, circuit-breaking provider abstraction.",
+    "Engineered a real-time mini-grid monitoring platform that unifies multiple hardware telemetry sources (Victron MQTT and an HMAC-SHA256-authenticated HTTP provider) into a single React dashboard with WebSocket push, rate-limited integration, and exponential backoff.",
+    "Architected a government-scale agricultural GIS intelligence platform (Next.js, PostGIS, Prisma) with multi-tenant RBAC, rule-based agronomic decision support, device-telemetry ingestion, and Anthropic Claude integration with a Google Generative AI fallback.",
+    "Built a deterministic document-intelligence backend (FastAPI, Celery, Postgres) with fail-closed extraction, append-only audit trails, org-scoped multi-tenancy, encrypted-at-rest agent credentials, and SSRF-guarded external connections — covered by a 47-file pytest suite.",
+    "Engineered autonomous AI-agent wallets on Solana with a dual decision engine (rule-based FSM plus Anthropic Claude), AES-256-GCM at-rest encryption, PBKDF2 key derivation at OWASP-recommended iterations, hard post-LLM safety gates, and on-chain event sourcing via the Solana Memo Program.",
+    "Shipped offline-first mobile products for African SMEs and energy markets using local SQLite with exponential-backoff cloud sync, background sync scheduling, and secure on-device token/biometric storage — designed to work fully without connectivity and reconcile on reconnect.",
+    "Established engineering discipline across the portfolio: GitHub Actions CI/CD (type-check, lint, unit and end-to-end tests, Docker image builds, deploy gates), sequential database migrations with test suites (pgTAP, Alembic, Prisma), structured logging, and production security hardening (HSTS, CSP, X-Frame-Options DENY, webhook idempotency, JWT rotation)."
+   ]
+  },
+  {
+   "title": "Backend / AI Engineer (Graduate Trainee)",
+   "org": "MIDS Dynamics Ltd",
+   "period": "Aug 2024 – Feb 2025",
+   "location": "Nigeria",
+   "bullets": [
+    "Built and optimized backend APIs powering AI-driven applications, implementing services with FastAPI and Django.",
+    "Designed and trained machine-learning models for predictive analytics, covering data preprocessing, feature engineering, and model training.",
+    "Integrated ML models into application backends and deployed them to cloud infrastructure.",
+    "Collaborated cross-functionally to take AI features from prototype to deployed product."
+   ]
+  },
+  {
+   "title": "Software Development Intern",
+   "org": "Blue Sapphire Hub",
+   "period": "Jul 2023 – Jan 2024",
+   "location": "Kano, Nigeria",
+   "bullets": [
+    "Debugged, maintained, and improved existing software in response to customer and department requests.",
+    "Wrote and maintained accurate technical documentation for the codebase and deployments.",
+    "Identified potential technical liabilities and risks, recommending fixes to resolve them.",
+    "Performed pre- and post-deployment maintenance and routine software backups."
+   ]
+  }
+ ],
+ "resumes": [
+  {
+   "key": "founder",
+   "title": "Founder & CEO — Meertech Ltd",
+   "audience": "Investors, partners, and enterprise/government clients evaluating Meertech as a serious African AI & infrastructure company. Leads with ownership, shipped products, and the energy/fintech/applied-AI thesis.",
+   "markdown": "# Mahmud Madobi\n**Founder & CEO, Meertech Ltd — AI Systems & Infrastructure Engineer**\n\nAbuja, Nigeria · [meertech.tech](https://meertech.tech) · [github.com/MEERTECHLTD](https://github.com/MEERTECHLTD) · [linkedin.com/in/mahmud-madobi](https://www.linkedin.com/in/mahmud-madobi)\n\n---\n\n## Profile\n\nFounder building production software for the parts of Africa where infrastructure is hardest: off-grid energy, fintech for the under-banked, and applied AI for agriculture and government. I am a hands-on technical founder — I architect and ship the systems, not just direct them. Across the portfolio that means multi-tenant backends with double-entry ledgers, offline-first mobile apps that work without connectivity, Postgres schemas hardened with row-level security and full audit trails, and CI/CD pipelines that deploy to production. The thesis is simple: globally-competitive engineering, built locally, for markets the rest of the industry overlooks.\n\n---\n\n## What Meertech Builds\n\n**Energy & climate infrastructure** — the largest cluster of the portfolio.\n- **Off-grid operations ERP** — Supabase/Postgres backend for renewable-energy and mini-grid operations: a multi-org schema across six Postgres schemas with deny-by-default row-level security (90+ policies), partitioned audit logging, an Express API on Cloud Run with JWKS-verified JWTs and Zod validation, and nine GitHub Actions workflows running schema migrations, pgTAP tests, and post-deploy RBAC verification gates. Executed a full production Firebase → Supabase migration, validated via live smoke tests against real accounts.\n- **Utility-payment platform (RanaWallet)** — multi-tenant FastAPI backend with schema-per-tenant isolation and an atomic double-entry ledger that refuses to post unbalanced journals; offline-first Expo/React Native app with transaction queueing and biometric auth. Production-deployed on DigitalOcean across a 12-container Docker Compose stack with automated nightly backups; 123 passing unit/integration tests. Idempotent vend/fund endpoints prevent replay double-charges; pluggable provider abstraction for urban and rural electricity vending.\n- **Mini-grid monitoring platform** — real-time dashboard for off-grid solar fleets, aggregating two telemetry providers (Victron VRM over MQTT, and a custom rate-limited HMAC-SHA256 HTTP client) into one React/Redux dashboard, with WebSocket push and a CI pipeline deploying to DigitalOcean via Nginx and PM2.\n- Plus a token-vending UI for prepaid power meters, a Victron-to-Prometheus telemetry exporter, and engineering calculators for minigrid/storage sizing.\n\n**Fintech & payments**\n- **ALOHA Wallet** — prepaid-electricity vending and revenue collection: 30+ Postgres migrations hardening RLS, ledger foundations, and BVN encryption (pgcrypto); RPC-only wallet writes with the authenticated role revoked from direct updates; strict CSP/HSTS headers; webhook idempotency via unique constraints; integrated bank virtual-account and SMS flows.\n- **Biz Track** — offline-first sales and inventory for Nigerian SMEs: local-first SQLite with a sync queue and exponential-backoff retry, background sync, and CSV export — fully functional with no internet, syncing when connectivity returns.\n\n**Applied AI & agents**\n- **Government-scale agri-intelligence platform** — real-time GIS command center (Leaflet + satellite tiles) with intrusion detection and multi-channel SMS/WhatsApp dispatch, a transparent rule-based agronomic engine, 10-role / 43-permission RBAC, dual AI provider routing (Anthropic Claude primary, Google Gemini fallback), and an external climate/soil enrichment pipeline (NASA POWER, Open-Meteo, SoilGrids).\n- **Document intelligence platform** — deterministic ingest → extract → validate → generate pipeline with fail-closed semantics, append-only audit trail, encrypted-at-rest agent credentials, SSRF-guarded connections, and 50 test files covering the security surface.\n- **Agentic wallets** — autonomous AI agents on Solana with a dual decision engine (rule-based FSM + Claude) behind hard safety gates, AES-256-GCM key encryption, and on-chain event sourcing.\n\n**Platforms & SaaS**\n- **Music analytics platform** — a Chartmetric-first data pipeline tracking 131 Nigerian artists across 15+ streaming platforms for a government economic-reporting mandate: job orchestration with pause/resume/retry, a quarterly aggregation engine computing QoQ/YoY change, an in-database methodology ledger for full data lineage, and timestamped Excel/CSV deliverables.\n\n---\n\n## How I Build\n\n- **Production discipline over demos.** Recurring patterns across the portfolio: row-level security, double-entry ledgers, idempotency keys, append-only audit logs, CI/CD with test gates, and offline-first sync — the things that matter when real money and real operations are on the line.\n- **AI-accelerated, not AI-dependent.** I use modern AI tooling to ship fast, then harden by hand: security audits, RBAC reviews, migration plans, and test coverage are documented in the repos themselves.\n- **Right-sized architecture.** Single-droplet Docker Compose where that's correct; autoscaling Cloud Run where it isn't. I build for the deployment reality, not the buzzword.\n\n---\n\n## Earlier Experience\n\n**Backend / AI Engineer (Graduate Trainee)** — MIDS Dynamics Ltd, Nigeria · Aug 2024 – Feb 2025\nBuilt and optimized backend APIs for AI applications (FastAPI, Django); worked on ML models for predictive analytics, data preprocessing and feature engineering, and cloud deployment of AI models in a cross-functional product team.\n\n**Software Development Intern** — Blue Sapphire Hub, Kano, Nigeria · Jul 2023 – Jan 2024\nDebugged, maintained, and improved production software; wrote technical documentation; handled pre/post-deployment maintenance and backups.\n\n---\n\n## Education & Certifications\n\n- **BSc, Computer Science & Information Technology** — Federal University Dutsin-Ma\n- **Software Engineering Program** — ALX Africa\n- **HCIA-AI** — Huawei (Sep 2024) · **HCIA-Datacom** — Huawei (Nov 2023) · **Java Programming** — Aptech (Nov 2022)\n\n**Languages:** English (fluent), Hausa (fluent)\n\n**Core stack:** TypeScript · Python · PostgreSQL/PostGIS · Supabase · FastAPI · Next.js · React/React Native (Expo) · Docker · GitHub Actions · Anthropic Claude"
+  },
+  {
+   "key": "ai-engineer",
+   "title": "AI Systems Engineer — Backend & Applied AI",
+   "audience": "Hiring managers and technical leads evaluating depth in AI systems, backend architecture, and production engineering. Leads with AI integration depth, data/backend rigor, and shipped systems.",
+   "markdown": "# Mahmud Madobi\n**AI Systems Engineer · Backend & Full-Stack · Applied-AI Builder**\n\nAbuja, Nigeria · [github.com/MEERTECHLTD](https://github.com/MEERTECHLTD) · [linkedin.com/in/mahmud-madobi](https://www.linkedin.com/in/mahmud-madobi) · [meertech.tech](https://meertech.tech)\n\n---\n\n## Summary\n\nBackend and applied-AI engineer who designs production systems end to end: data model, API, AI integration, security, CI/CD, and deployment. I build LLM features the way they should be built for real users — structured-output prompting, schema validation on every response, rate limits, hard safety gates *after* the model, and deterministic fallbacks when the API is unavailable. Equally comfortable in the parts that aren't AI: Postgres schema design with row-level security, double-entry ledgers, idempotent payment endpoints, offline-first sync, and multi-stage deployment pipelines. Founder & CEO of Meertech Ltd, building this across energy, fintech, and agriculture.\n\n---\n\n## Selected AI Systems\n\n**Agentic wallets on Solana** *(public)* — Autonomous AI agents that manage keypairs and execute real on-chain trades.\n- **Dual decision engine:** Anthropic Claude as the production reasoner with a rule-based FSM fallback for offline/API-failure scenarios — both behind the same interface.\n- **Safety after the model:** structured JSON prompting with injected constraints, plus hard post-LLM gates (per-tx cap, balance floor enforced *after* the model decides).\n- AES-256-GCM at-rest key encryption, PBKDF2 derivation (210k iterations, OWASP 2023), and on-chain event sourcing via the Memo program for an immutable audit trail. Docker multi-stage build with health checks; multi-agent harness for N concurrent agents.\n\n**Government-scale agri-intelligence platform** *(private)* — Next.js 15 + Postgres/PostGIS.\n- **Dual AI provider routing:** Anthropic Claude (primary) with Google Gemini fallback for streaming chat with farm-context injection.\n- **Transparent, auditable intelligence:** a deterministic agronomic ruleset (10 crops × soil/water/irrigation matrix) with explicit weights and per-decision reasoning — AI for the conversational surface, deterministic rules for the decisions agronomists must audit.\n- 13 Prisma migrations with phased authorization shadow-testing, 4-job CI (typecheck/unit/e2e/deploy), Pino + Prometheus observability, and an external enrichment pipeline (NASA POWER, Open-Meteo, SoilGrids).\n\n**Document intelligence platform** *(private)* — FastAPI + Celery + Postgres, type-strict uv monorepo.\n- Deterministic ingest → extract → validate → generate pipeline with **fail-closed** semantics (partial results never reported as success).\n- Extraction across native-PDF, OCR fallback (Tesseract), DOCX, and images, with blocking I/O offloaded to a thread pool to keep the event loop responsive.\n- MCP connection registry letting agents plug in custom extraction/validation over HTTP, with **Fernet-encrypted credentials**, rotation, and **SSRF guards** that block loopback/link-local/private addresses before dispatch. 50 pytest files cover auth, extraction, validation, RBAC, rate limiting, and the SSRF/virus-scan paths.\n\n**ExportFlow AI** *(private)* — Five Claude-powered capabilities (smart cost-fill, compliance checklists, pricing intel, NL parsing, document extraction), each with **per-function rate limits (20–30/hour)**, Zod structured-output validation, and **graceful mock-data fallback when the API key is unset.** The pricing core is a pure, fully unit-tested function mirrored server-side to prevent tampering.\n\n**MaizeGuardAI** *(public)* — CNN maize-disease classifier (Keras Sequential, 5-class) served via FastAPI to a React frontend, augmented with a Gemini chat assistant for treatment guidance. Reported 95.35% accuracy on the leaf-classification task.\n\n**Claude RAG + assistants** are integrated into the off-grid operations ERP (Anthropic API in the v2 API layer) alongside the rest of that platform's backend.\n\n---\n\n## Backend & Data Engineering (the non-AI half)\n\n- **Multi-tenancy & ledgers:** schema-per-tenant FastAPI platform (RanaWallet) with `schema_translate_map` zero-copy isolation and an atomic double-entry ledger (`post_journal` refuses unbalanced journals); idempotent vend/fund endpoints via Idempotency-Key + deterministic references.\n- **Postgres at depth:** deny-by-default RLS (90+ policies in the off-grid ERP), SECURITY DEFINER helpers pinned to a trusted search_path, partitioned audit logs (pg_partman), pgvector, pg_cron; RPC-only wallet writes with the authenticated role revoked from direct UPDATE (ALOHA).\n- **Offline-first:** SQLite/AsyncStorage local-first stores with sync queues and exponential-backoff retry (Biz Track, RanaWallet mobile), so the app works with no connectivity and reconciles on reconnect.\n- **Security hardening, documented:** a dated security audit in the off-grid ERP (prioritized findings triaged and remediated), JWT refresh rotation with a jti denylist, webhook idempotency, CSP/HSTS headers, and SSRF guards — written up in-repo, not just claimed.\n- **CI/CD & ops:** 9-workflow GitHub Actions pipeline (Cloud Run deploy with autoscaling, Vercel web builds, pgTAP migration tests, post-deploy RBAC gates); Docker Compose multi-service deployments with health checks and nightly backup automation.\n\n---\n\n## Experience\n\n**Founder & CEO** — Meertech Ltd · Abuja, Nigeria\nArchitect and lead engineer across a portfolio of production systems in energy, fintech, and applied AI (above).\n\n**Backend / AI Engineer (Graduate Trainee)** — MIDS Dynamics Ltd · Aug 2024 – Feb 2025\nBuilt and optimized backend APIs for AI applications (FastAPI, Django); ML models for predictive analytics; data preprocessing, feature engineering, and cloud deployment in a cross-functional product team.\n\n**Software Development Intern** — Blue Sapphire Hub, Kano · Jul 2023 – Jan 2024\nDebugged and maintained production software; technical documentation; deployment maintenance and backups.\n\n---\n\n## Education & Certifications\n\n- **BSc, Computer Science & Information Technology** — Federal University Dutsin-Ma\n- **Software Engineering Program** — ALX Africa\n- **HCIA-AI** — Huawei (Sep 2024) · **HCIA-Datacom** — Huawei (Nov 2023) · **Java Programming** — Aptech (Nov 2022)\n\n## Stack\n\n**Languages:** TypeScript, Python, SQL/PL-pgSQL, Java · **AI:** Anthropic Claude (SDK, RAG, agents, structured output), Google Gemini, TensorFlow/Keras (CNN) · **Backend:** FastAPI, Express/Node, Django, Celery, SQLAlchemy/Prisma, Redis · **Data:** PostgreSQL/PostGIS, pgvector, Supabase, SQLite, InfluxDB · **Frontend/Mobile:** Next.js, React, React Native/Expo · **Infra:** Docker/Compose, Google Cloud Run, DigitalOcean, Vercel, GitHub Actions, Nginx/PM2, Prometheus/Grafana · **Languages spoken:** English, Hausa"
+  },
+  {
+   "key": "research",
+   "title": "Applied AI / R&D Engineer — Methods, Safety & Systems Rigor",
+   "audience": "Research labs, applied-science teams, and technical orgs evaluating engineering rigor, AI-systems methods, and safety-aware design. Frames work as applied AI / R&D — no academic publications are claimed.",
+   "markdown": "# Mahmud Madobi\n**Applied AI / R&D Engineer — AI Systems, Safety-Aware Design & Data Rigor**\n\nAbuja, Nigeria · [github.com/MEERTECHLTD](https://github.com/MEERTECHLTD) · [linkedin.com/in/mahmud-madobi](https://www.linkedin.com/in/mahmud-madobi) · [meertech.tech](https://meertech.tech)\n\n> Applied-AI engineer and founder. My work is in production R&D, not academic publication — the focus below is on methods, system design, and the rigor that makes AI usable in high-stakes, low-infrastructure settings.\n\n---\n\n## Research & Engineering Interests\n\nReliable AI systems for resource-constrained, high-stakes environments: LLM decision-making with verifiable safety bounds, deterministic-vs-learned tradeoffs in decision systems, data lineage and auditability, and offline-first / intermittently-connected architectures. Applied across energy, agriculture, fintech, and government data.\n\n---\n\n## Methods & Findings (from shipped systems)\n\n**Constraining LLM agents with post-hoc safety gates.**\nIn an autonomous on-chain agent system (Solana, public), I separated *reasoning* from *authority*: Anthropic Claude proposes actions via structured JSON with injected constraints, but a deterministic layer enforces hard limits (per-transaction cap, balance floor) **after** the model responds, so a hallucinated or adversarial decision cannot exceed the bound. A rule-based finite-state-machine fallback shares the identical interface, giving graceful degradation when the model is unavailable. Every action is event-sourced on-chain (Memo program) for an immutable, externally-verifiable audit trail.\n\n**Deterministic decisions, conversational AI — separated on purpose.**\nIn a government-scale agricultural intelligence platform, the decisions that domain experts must audit (crop suitability across a 10-crop × soil/water/irrigation/tier matrix) are produced by a transparent weighted ruleset with per-decision reasoning — *not* an LLM — while Claude (primary) and Gemini (fallback) handle the conversational and advisory surface. This keeps the auditable core inspectable while still offering natural-language interaction, with provider routing for resilience.\n\n**Fail-closed pipelines and provenance.**\nA document-intelligence backend implements deterministic ingest → extract → validate → generate with **fail-closed** semantics: state transitions are committed before async work and partial results are never reported as success. Validation is a rule engine that normalizes extracted strings (dates, amounts, names) and matches them against trusted reference records, persisting findings with severity. An append-only Postgres audit trail with a canonicalized event format supports forensic review. Agent integrations are SSRF-guarded and use encrypted-at-rest credentials with rotation.\n\n**Data lineage as a first-class object.**\nA music-industry analytics platform built for a government economic-reporting mandate treats methodology and provenance as schema: a `MethodologyEntry` ledger documents every metric's definition, source, coverage limitations, fallback logic, and aggregation rule, *tied to each observation*; raw API payloads are stored with response SHA-256 hashes for reproducibility. A quarterly aggregation engine applies metric-specific rules (net-change, sum, last-value) to compute QoQ/YoY change over an auditable `ExtractionJob → JobRun → Observation` chain.\n\n**Vision model in the loop.**\nA maize-disease classifier (Keras Sequential CNN, 5-class, reported 95.35% accuracy) is served via FastAPI behind a React UI and paired with a Gemini assistant that turns predictions into actionable, farmer-readable guidance — a deployed example of model + LLM in a single applied workflow.\n\n---\n\n## Engineering Rigor (evidence in-repo)\n\n- **Test discipline:** 50 pytest files covering the security surface of the document platform (auth, extraction, validation, RBAC, rate limiting, SSRF, virus scan); 123 passing tests across a multi-tenant fintech backend + mobile app; pgTAP database tests gated in CI; authorization shadow-testing before rollout.\n- **Verifiable safety properties:** atomic double-entry ledger that refuses unbalanced journals; idempotency keys preventing replay double-charges; deny-by-default row-level security (90+ policies); JWT refresh rotation with a jti denylist.\n- **Reproducibility & ops:** uv workspace with frozen lock file; digest-pinned Docker images; multi-stage CI/CD with post-deploy verification gates; structured logging (Pino/structlog) with request correlation IDs; Prometheus/Grafana observability.\n- **Documented self-critique:** a dated security audit (prioritized findings triaged and remediated in-session, with deferred items tracked) lives in the off-grid ERP repo — methodology applied to one's own system.\n\n---\n\n## Experience\n\n**Founder & CEO** — Meertech Ltd · Abuja, Nigeria — Architect and lead engineer for the applied-AI and infrastructure systems above.\n\n**Backend / AI Engineer (Graduate Trainee)** — MIDS Dynamics Ltd · Aug 2024 – Feb 2025 — Backend APIs for AI applications (FastAPI, Django); ML models for predictive analytics; data preprocessing, feature engineering, and cloud deployment of models.\n\n**Software Development Intern** — Blue Sapphire Hub, Kano · Jul 2023 – Jan 2024 — Software maintenance, debugging, and technical documentation.\n\n---\n\n## Education & Certifications\n\n- **BSc, Computer Science & Information Technology** — Federal University Dutsin-Ma\n- **Software Engineering Program** — ALX Africa\n- **HCIA-AI** — Huawei (Sep 2024) · **HCIA-Datacom** — Huawei (Nov 2023) · **Java Programming** — Aptech (Nov 2022)\n\n**Methods & tools:** Anthropic Claude (structured output, agents, RAG), Google Gemini, TensorFlow/Keras (CNN), FastAPI/Celery, PostgreSQL/PostGIS/pgvector, Prisma/SQLAlchemy, Docker, GitHub Actions, Prometheus/Grafana · **Languages:** Python, TypeScript, SQL · **Spoken:** English, Hausa"
+  },
+  {
+   "key": "recruiter-concise",
+   "title": "One-Page Resume — Founder & AI Systems Engineer",
+   "audience": "Recruiters and busy hiring managers doing a 30-second scan. One page, scannable, leads with founder + substantial systems, then stack, top projects, roles, education, certs.",
+   "markdown": "# Mahmud Madobi\n**Founder & AI Systems Engineer — Backend / Full-Stack / Applied AI**\n\nAbuja, Nigeria · [github.com/MEERTECHLTD](https://github.com/MEERTECHLTD) · [linkedin.com/in/mahmud-madobi](https://www.linkedin.com/in/mahmud-madobi) · [meertech.tech](https://meertech.tech)\n\n---\n\nFounder & CEO of Meertech Ltd and the lead engineer behind it. I ship production systems for energy access, fintech, and applied AI: multi-tenant Postgres backends, double-entry ledgers, offline-first mobile apps, LLM features with real safety gates, and CI/CD that deploys to production. Hands-on across the full stack.\n\n## Core Stack\n**Languages:** TypeScript · Python · SQL/PL-pgSQL · Java\n**AI:** Anthropic Claude (SDK, agents, RAG, structured output) · Google Gemini · TensorFlow/Keras (CNN)\n**Backend:** FastAPI · Express/Node · Django · Celery · SQLAlchemy/Prisma · Redis\n**Data:** PostgreSQL/PostGIS · pgvector · Supabase · SQLite (offline-first)\n**Frontend/Mobile:** Next.js · React · React Native/Expo\n**Infra:** Docker/Compose · Google Cloud Run · DigitalOcean · Vercel · GitHub Actions · Prometheus/Grafana\n\n## Selected Projects\n- **Off-grid operations ERP** *(private)* — Supabase/Postgres backend: multi-org schema, deny-by-default RLS (90+ policies), partitioned audit logs, Cloud Run Express API (JWKS, Zod), 9-workflow CI/CD with pgTAP tests and post-deploy RBAC gates. Ran a full production Firebase → Supabase migration.\n- **RanaWallet — utility-payment platform** *(private)* — schema-per-tenant FastAPI backend with an atomic double-entry ledger + idempotent endpoints; offline-first Expo app; production on DigitalOcean (12-container Compose), nightly backups, 123 passing tests.\n- **Agentic wallets on Solana** *(public)* — autonomous AI agents with Claude + rule-based FSM fallback, hard post-LLM safety gates, AES-256-GCM key encryption, on-chain audit trail.\n- **Government-scale agri-intelligence platform** *(private)* — Next.js + PostGIS GIS command center; dual AI routing (Claude + Gemini); transparent rule-based agronomic engine; 10-role/43-permission RBAC; 4-job CI/CD.\n- **Document intelligence platform** *(private)* — fail-closed FastAPI/Celery pipeline (extract→validate→generate), SSRF-guarded agent integrations, encrypted credentials, 50 pytest files.\n- **MaizeGuardAI** *(public)* — CNN maize-disease classifier (FastAPI + React) with Gemini assistant; reported 95.35% accuracy.\n\n## Experience\n**Founder & CEO** — Meertech Ltd, Abuja · Architect & lead engineer across the portfolio above.\n**Backend / AI Engineer (Graduate Trainee)** — MIDS Dynamics Ltd · Aug 2024 – Feb 2025 · Backend APIs for AI apps (FastAPI/Django), ML for predictive analytics, model deployment.\n**Software Development Intern** — Blue Sapphire Hub, Kano · Jul 2023 – Jan 2024 · Software maintenance, debugging, documentation.\n\n## Education & Certifications\n**BSc, Computer Science & IT** — Federal University Dutsin-Ma · **Software Engineering** — ALX Africa\n**HCIA-AI** — Huawei (2024) · **HCIA-Datacom** — Huawei (2023) · **Java Programming** — Aptech (2022)\n\n**Languages:** English (fluent) · Hausa (fluent)"
+  }
+ ],
+ "seo": {
+  "title": "Mahmud Madobi — AI Systems Engineer & Founder",
+  "description": "Mahmud Madobi is an AI systems engineer and founder of Meertech Ltd, building production AI, energy-access, and fintech infrastructure from Abuja, Nigeria.",
+  "keywords": [
+   "Mahmud Madobi",
+   "Sani Mahmud Madobi",
+   "AI Systems Engineer",
+   "AI Engineer",
+   "Backend Engineer",
+   "Full-Stack Engineer",
+   "Applied AI",
+   "Meertech",
+   "Meertech Ltd",
+   "African AI",
+   "Nigeria software engineer",
+   "Abuja developer",
+   "Energy access infrastructure",
+   "Mini-grid software",
+   "Fintech infrastructure",
+   "FastAPI",
+   "Next.js",
+   "Supabase",
+   "React Native",
+   "PostgreSQL",
+   "AI agents",
+   "Founder CEO"
+  ],
+  "ogTitle": "Mahmud Madobi — AI Systems Engineer & Founder of Meertech Ltd",
+  "ogDescription": "Founder of Meertech Ltd, engineering production AI, energy-access, and fintech systems from Abuja, Nigeria — multi-tenant platforms, off-grid energy infrastructure, and applied-AI agents.",
+  "twitterCard": "summary_large_image"
+ }
+}
