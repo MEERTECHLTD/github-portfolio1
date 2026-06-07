@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Github, Linkedin, Twitter, Globe, Mail } from 'lucide-react'
 import { site, nav } from '@/lib/site'
+import { BrandMark } from './BrandMark'
 
 const socials = [
   { icon: Github, href: site.links.github, label: 'GitHub' },
@@ -18,9 +19,7 @@ export function Footer() {
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
             <Link href="/" className="flex items-center gap-2.5">
-              <span className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04] font-mono text-sm font-semibold text-zinc-100">
-                {site.initials}
-              </span>
+              <BrandMark />
               <span className="text-sm font-medium text-zinc-200">{site.name}</span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-zinc-500">

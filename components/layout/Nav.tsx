@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { nav, site } from '@/lib/site'
+import { BrandMark } from './BrandMark'
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -34,9 +35,7 @@ export function Nav() {
         )}
       >
         <Link href="/" className="group flex items-center gap-2.5" aria-label={`${site.name} — home`}>
-          <span className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04] font-mono text-sm font-semibold text-zinc-100 transition-colors group-hover:border-accent-indigo/40">
-            {site.initials}
-          </span>
+          <BrandMark className="transition-colors group-hover:border-accent-indigo/40" />
           <span className="hidden text-sm font-medium text-zinc-200 sm:block">{site.name}</span>
         </Link>
 
@@ -61,6 +60,7 @@ export function Nav() {
             <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
           <button
+            type="button"
             onClick={() => setOpen((v) => !v)}
             className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.03] text-zinc-200 md:hidden"
             aria-label={open ? 'Close menu' : 'Open menu'}
