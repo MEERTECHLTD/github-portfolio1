@@ -110,7 +110,9 @@ const year = new Date().getFullYear();
   .burger span:first-child { top: 17px; } .burger span:last-child { top: 25px; }
   .burger[aria-expanded="true"] span:first-child { top: 21px; transform: rotate(45deg); }
   .burger[aria-expanded="true"] span:last-child { top: 21px; transform: rotate(-45deg); }
-  .drawer { position: fixed; inset: var(--header-h) 0 0 0; background: var(--bg); padding-top: var(--s5); overflow-y: auto; }
+  /* The header gains a backdrop-filter when open, which makes it the containing
+     block for this fixed element; size by viewport height, not by inset. */
+  .drawer { position: fixed; top: var(--header-h); left: 0; right: 0; height: calc(100vh - var(--header-h)); height: calc(100dvh - var(--header-h)); background: var(--bg); padding-top: var(--s5); overflow-y: auto; }
   .drawer a { display: flex; align-items: center; min-height: 64px; font-family: var(--serif); font-size: 2.25rem; border-bottom: 1px solid var(--line); }
   @media (max-width: 860px) { .hdr-nav, .hdr-cta { display: none; } .burger { display: block; } }
   .ftr { border-top: 1px solid var(--line); padding-block: var(--s9) var(--s6); }
