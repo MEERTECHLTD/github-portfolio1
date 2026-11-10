@@ -1,36 +1,36 @@
 {
   "name": "mahmud-madobi-portfolio",
-  "version": "1.0.0",
   "private": true,
-  "description": "Portfolio of Mahmud Madobi — AI Systems Engineer & Founder of Meertech Ltd",
+  "type": "module",
+  "version": "2.0.0",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "astro dev",
+    "github": "node scripts/github.mjs",
+    "build": "node scripts/github.mjs && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "node --test \"scripts/tests/*.test.mjs\"",
+    "verify": "npm run check && npm run build && npm test"
   },
   "dependencies": {
-    "clsx": "^2.1.1",
-    "framer-motion": "^11.18.2",
-    "geist": "^1.3.1",
-    "lucide-react": "^0.469.0",
-    "next": "^15.5.19",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-markdown": "^9.0.3",
-    "remark-gfm": "^4.0.0",
-    "tailwind-merge": "^2.6.0"
+    "astro": "^5.18.2",
+    "three": "^0.170.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16",
-    "@types/node": "^22.10.7",
-    "@types/react": "^19.0.7",
-    "@types/react-dom": "^19.0.3",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^9.39.4",
-    "eslint-config-next": "^15.5.19",
-    "postcss": "^8.5.1",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.3"
+    "@astrojs/check": "^0.9.12",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@fontsource/geist-mono": "^5.3.0",
+    "@fontsource/geist-sans": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/node": "^26.6.6",
+    "@types/three": "^0.187.0",
+    "node-html-parser": "^9.0.7",
+    "satori": "^0.63.2",
+    "typescript": "^5.9.3"
   }
 }

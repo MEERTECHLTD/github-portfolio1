@@ -1,0 +1,121 @@
+---
+import Base from "../../layouts/Base.astro";
+import { projects, STATUS, DOMAINS, type Project } from "../../data/projects";
+import { projectSchema } from "../../lib/seo";
+export function getStaticPaths() { return projects.map((p) => ({ params: { slug: p.slug }, props: { p } })); }
+const { p } = Astro.props as { p: Project };
+const path = `/work/${p.slug}`;
+const long = `${p.name}: architecture and decisions | Mahmud Sani Madobi`;
+const mid = `${p.name}: architecture and engineering decisions`;
+const title = long.length <= 64 ? long : mid.length <= 70 ? mid : `${p.name}: architecture and decisions`;
+const description = `${p.summary} Status: ${STATUS[p.status].label.toLowerCase()}.`.slice(0, 168);
+const crumbs = [{ name: "Home", href: "/" }, { name: "Work", href: "/work" }, { name: p.name, href: path }];
+const i = projects.indexOf(p), next = projects[(i + 1) % projects.length]!;
+const related = projects.filter((q) => q.slug !== p.slug && q.domains[0] === p.domains[0]).slice(0, 3);
+---
+<Base title={title} description={description} og={`work-${p.slug}`} crumbs={crumbs} pageType="ItemPage" schema={[projectSchema(p, path)]}>
+  <section class="phero">
+    <div class="wrap">
+      <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/work">Work</a></li><li aria-current="page">{p.name}</li></ol>
+      <h1>{p.name}</h1>
+      <p class="lead">{p.tagline}</p>
+      <div class="meta">
+        <span class={`status status-${p.status}`}>{STATUS[p.status].label}</span>
+        <span class="mono faint">{p.domains.map((d) => DOMAINS[d].label).join(" · ")} · {p.visibility}</span>
+      </div>
+      {p.links && <div class="btn-row" style="margin-top: var(--s6)">{p.links.map((l, k) => <a class:list={["btn", { "btn-primary": k === 0 }]} href={l.href} rel="noopener">{l.label} <span aria-hidden="true">↗</span></a>)}</div>}
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap grid">
+      <div class="c-5">
+        <p class="chap"><b>01</b> Problem</p>
+        <h2 class="h">{p.summary}</h2>
+      </div>
+      <div class="c-7 stack">
+        <p class="lead">{p.problem}</p>
+        <dl class="rows">
+          <div><dt>Built for</dt><dd>{p.builtFor}</dd></div>
+          <div><dt>Status</dt><dd>{STATUS[p.status].label}. {STATUS[p.status].def}</dd></div>
+          <div><dt>Evidence</dt><dd>{p.evidence}</dd></div>
+          {p.boundary && <div><dt>Boundary</dt><dd>{p.boundary}</dd></div>}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap">
+      <p class="chap"><b>02</b> Architecture</p>
+      <figure class="arch">
+        <ol style={`--n:${p.flow.length}`}>
+          {p.flow.map((f, k) => <li class="rv" style={`--i:${k}`} tabindex="0"><span class="mono">{String(k + 1).padStart(2, "0")}</span><h3>{f.stage}</h3><p>{f.detail}</p></li>)}
+        </ol>
+        <figcaption class="mono faint">Fig · {p.name}, as a pipeline. Components as built. No measured values are shown.</figcaption>
+      </figure>
+      <ul class="chips" style="margin-top: var(--s6)">{p.stack.map((s) => <li>{s}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap grid">
+      <div class="c-4"><p class="chap"><b>03</b> Decisions</p><h2 class="h">The decisions that shaped <span class="i">it.</span></h2></div>
+      <ol class="c-8 dec">{p.decisions.map((d, k) => <li class="rv"><span class="mono faint">{String(k + 1).padStart(2, "0")}</span><div><h3>{d.title}</h3><p class="muted">{d.text}</p></div></li>)}</ol>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap grid">
+      <div class="c-6"><p class="chap"><b>04</b> Security</p>
+        {p.security.length ? <ul class="tick">{p.security.map((s) => <li>{s}</li>)}</ul> : <p class="muted">A research model with no deployment has no security surface worth describing. Saying so is better than inventing one.</p>}
+      </div>
+      <div class="c-6"><p class="chap"><b>05</b> Data</p><p class="lead">{p.data}</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      {related.length > 0 && <><p class="chap"><b>→</b> Related systems</p>
+      <ul class="rel">{related.map((q) => <li><a href={`/work/${q.slug}`}><span class="serif rel-n">{q.name}</span><span class={`status status-${q.status}`}>{STATUS[q.status].label}</span><span class="muted">{q.tagline}</span></a></li>)}</ul></>}
+      <a class="nextp" href={`/work/${next.slug}`}><span class="mono faint">Next system</span><span class="serif">{next.name} <span class="arw" aria-hidden="true">→</span></span></a>
+    </div>
+  </section>
+</Base>
+<style>
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4); margin-top: var(--s6); }
+  .h { font-family: var(--sans); font-weight: 520; font-size: clamp(1.5rem, 1.4vw + 1.1rem, 2.125rem); letter-spacing: -0.02em; line-height: 1.18; }
+  .h .i { font-family: var(--serif); }
+  .arch ol { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 0; counter-reset: s; }
+  .arch li { position: relative; padding: var(--s5) var(--s4) var(--s6); border: 1px solid var(--line-2); border-right-width: 0; background: var(--bg); display: grid; gap: var(--s2); align-content: start; transition: background 200ms, border-color 200ms; }
+  .arch li:last-child { border-right-width: 1px; }
+  .arch li:not(:last-child)::after { content: "→"; position: absolute; right: -9px; top: 50%; translate: 0 -50%; z-index: 2; width: 18px; height: 18px; display: grid; place-items: center; background: var(--bg-2); color: var(--mark); font-family: var(--mono); font-size: 12px; border-radius: 50%; }
+  .arch li:hover, .arch li:focus-visible { background: var(--bg-3); border-color: var(--mark); outline: none; }
+  .arch li:hover + li, .arch li:focus-visible + li { border-left-color: var(--mark); }
+  .arch li .mono { color: var(--mark); font-size: var(--t-micro); }
+  .arch h3 { font-size: 1.125rem; margin-top: var(--s3); }
+  .arch p { font-size: var(--t-small); color: var(--ink-2); }
+  .arch figcaption { margin-top: var(--s4); font-size: var(--t-micro); }
+  @media (max-width: 1000px) {
+    .arch ol { grid-template-columns: 1fr; }
+    .arch li { border-right-width: 1px; border-bottom-width: 0; }
+    .arch li:last-child { border-bottom-width: 1px; }
+    .arch li:not(:last-child)::after { content: "↓"; right: auto; left: 24px; top: auto; bottom: -9px; translate: 0 0; }
+  }
+  .dec { border-top: 1px solid var(--line-2); }
+  .dec li { display: grid; grid-template-columns: 48px 1fr; gap: var(--s4); padding: var(--s6) 0; border-bottom: 1px solid var(--line); }
+  .dec h3 { font-size: 1.5rem; }
+  .dec p { margin-top: var(--s3); max-width: 64ch; font-size: 1.125rem; line-height: 1.6; }
+  .tick li { position: relative; padding: var(--s3) 0 var(--s3) 26px; border-bottom: 1px solid var(--line); }
+  .tick li::before { content: ""; position: absolute; left: 0; top: 1.25em; width: 12px; height: 1px; background: var(--mark); }
+  .rel { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--s5); margin-bottom: var(--s9); }
+  .rel a { display: grid; gap: var(--s3); justify-items: start; padding: var(--s5); border: 1px solid var(--line); height: 100%; align-content: start; transition: border-color 200ms; }
+  .rel a:hover { border-color: var(--mark); }
+  .rel-n { font-size: 1.75rem; line-height: 1.05; }
+  .rel .muted { font-size: var(--t-small); }
+  .nextp { display: grid; gap: var(--s2); padding-top: var(--s6); border-top: 1px solid var(--line-2); }
+  .nextp .serif { font-size: clamp(2.5rem, 6vw, 5.5rem); line-height: 1; }
+  .nextp:hover .serif { color: var(--mark); }
+  .nextp .arw { display: inline-block; transition: transform 300ms var(--ease-out); }
+  .nextp:hover .arw { transform: translateX(10px); }
+</style>

@@ -1,0 +1,79 @@
+---
+import Base from "../../layouts/Base.astro";
+import SystemsMap from "../../components/SystemsMap.astro";
+import { sorted, projects, STATUS, DOMAINS, countBy, type Domain, type Status } from "../../data/projects";
+const title = "Work: systems built by Mahmud Sani Madobi";
+const description = "Seventeen systems in energy, finance, AI and data, each classified from evidence as production, substantial, functional or prototype, with its architecture.";
+const crumbs = [{ name: "Home", href: "/" }, { name: "Work", href: "/work" }];
+const list = { "@type": "ItemList", "@id": "https://sm.meertech.tech/work#list", itemListElement: sorted.map((p, i) => ({ "@type": "ListItem", position: i + 1, name: p.name, url: `https://sm.meertech.tech/work/${p.slug}` })) };
+---
+<Base title={title} description={description} og="work" crumbs={crumbs} pageType="CollectionPage" schema={[list]}>
+  <section class="phero">
+    <div class="wrap">
+      <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Work</li></ol>
+      <h1>The work, and how far each piece <span class="i">got.</span></h1>
+      <p class="lead">{projects.length} systems. Each is classified from evidence I can point to: a live product, a client deployment recorded by MeerTech, a repository's history. A prototype is called a prototype.</p>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="wrap">
+      <div class="grid">
+        <div class="c-7"><SystemsMap filters /></div>
+        <dl class="c-5 defs">
+          {(Object.keys(STATUS) as Status[]).map((s) => <div><dt><span class={`status status-${s}`}>{STATUS[s].label}</span><b>{countBy(s)}</b></dt><dd class="muted">{STATUS[s].def}</dd></div>)}
+          <div><dt class="label">Source</dt><dd class="muted">"Private source" means the code belongs to a product or client and cannot be published. Open systems link to their repository.</dd></div>
+        </dl>
+      </div>
+      <form class="flt" data-flt aria-label="Filter the work">
+        <fieldset><legend class="label">Domain</legend>{(Object.keys(DOMAINS) as Domain[]).map((d) => <label class="fchip"><input type="checkbox" name="d" value={d} /><span>{DOMAINS[d].label}</span></label>)}</fieldset>
+        <fieldset><legend class="label">Status</legend>{(Object.keys(STATUS) as Status[]).map((s) => <label class="fchip"><input type="checkbox" name="s" value={s} /><span>{STATUS[s].label}</span></label>)}</fieldset>
+        <p class="mono faint" data-count aria-live="polite">{projects.length} systems</p>
+      </form>
+      <ol class="all" data-all>
+        {sorted.map((p) => (
+          <li data-d={p.domains.join(" ")} data-s={p.status}>
+            <a href={`/work/${p.slug}`} data-sm-node={p.slug}>
+              <span class="all-h"><span class="all-n serif">{p.name}</span><span class={`status status-${p.status}`}>{STATUS[p.status].label}</span></span>
+              <span class="all-t muted">{p.tagline}</span>
+              <span class="all-m mono faint">{p.domains.map((d) => DOMAINS[d].label).join(" · ")} · {p.visibility}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+  <script>
+    import "../../scene/boot";
+    const f = document.querySelector<HTMLFormElement>("[data-flt]");
+    const items = [...document.querySelectorAll<HTMLElement>("[data-all] > li")];
+    const count = document.querySelector<HTMLElement>("[data-count]");
+    f?.addEventListener("input", () => {
+      const fd = new FormData(f), d = fd.getAll("d") as string[], s = fd.getAll("s") as string[];
+      let n = 0;
+      items.forEach((li) => { const ok = (!d.length || d.some((x) => li.dataset.d!.split(" ").includes(x))) && (!s.length || s.includes(li.dataset.s!)); li.hidden = !ok; if (ok) n++; });
+      if (count) count.textContent = `${n} ${n === 1 ? "system" : "systems"}`;
+    });
+  </script>
+</Base>
+<style>
+  .defs { display: grid; gap: 0; align-content: start; border-top: 1px solid var(--line-2); }
+  .defs > div { padding: var(--s4) 0; border-bottom: 1px solid var(--line); display: grid; gap: var(--s2); }
+  .defs dt { display: flex; justify-content: space-between; align-items: center; }
+  .defs b { font-family: var(--serif); font-size: 2rem; font-weight: 400; line-height: 1; }
+  .defs dd { font-size: var(--t-small); }
+  .flt { display: flex; flex-wrap: wrap; gap: var(--s5) var(--s8); align-items: end; margin-top: var(--s9); padding-bottom: var(--s5); border-bottom: 1px solid var(--line-2); }
+  .flt fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .flt legend { margin-bottom: var(--s3); padding: 0; }
+  .fchip { position: relative; cursor: pointer; }
+  .fchip input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .fchip span { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 999px; font-size: var(--t-small); color: var(--ink-2); transition: all 160ms; }
+  .fchip:hover span { border-color: var(--ink); color: var(--ink); }
+  .fchip input:checked + span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .fchip input:focus-visible + span { outline: 2px solid var(--mark); outline-offset: 3px; }
+  .flt [data-count] { margin-left: auto; }
+  .all a { display: grid; gap: var(--s2); padding: var(--s5) 0; border-bottom: 1px solid var(--line); transition: padding 300ms var(--ease); }
+  .all-h { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s3); }
+  .all-n { font-size: clamp(1.75rem, 2.4vw + 0.9rem, 2.75rem); line-height: 1.05; }
+  .all-m { font-size: var(--t-micro); }
+  .all a:hover { padding-left: var(--s4); } .all a:hover .all-n { color: var(--mark); }
+</style>

@@ -1,0 +1,299 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import SystemsMap from "../components/SystemsMap.astro";
+import gh from "../data/github.json";
+import { SITE, PRINCIPLES, EXPERIENCE, EDUCATION, CREDENTIALS, LEADERSHIP, STACK } from "../data/site";
+import { featured, projects, STATUS, countBy } from "../data/projects";
+const title = "Mahmud Sani Madobi: AI systems engineer and software architect";
+const description = "AI systems engineer, software architect and founder of MeerTech Ltd in Abuja, Nigeria. Production systems for energy, finance and data, built for real-world constraints.";
+const notes = (await getCollection("writing")).sort((a, b) => +b.data.date - +a.data.date);
+const measured = new Date(gh.measuredAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+---
+<Base title={title} description={description} og="home" pageType="ProfilePage" ogType="profile">
+  <section class="hero" aria-labelledby="h">
+    <div class="wrap hero-in">
+      <div class="hero-text">
+        <p class="label"><span class="label-mark">{SITE.title}</span> · {SITE.location}</p>
+        <h1 id="h">Building intelligent systems for the <span class="i">real world.</span></h1>
+        <p class="lead">I'm {SITE.name}, an AI systems engineer and software architect. I design, build and run software for energy, finance and data: systems that have to stay correct when the power, the network and the inputs do not.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="/work">Explore my work <span class="arw" aria-hidden="true">→</span></a>
+          <a class="btn" href="#stack">View my engineering stack</a>
+          <a class="btn" href="/resume">Download my résumé</a>
+          <a class="btn" href="#contact">Let's collaborate</a>
+        </div>
+        <ul class="hero-caps" aria-label="Main capabilities">
+          {["AI systems and agents", "Backend and distributed systems", "Financial infrastructure", "Energy and IoT", "Geospatial intelligence", "Offline-first architecture"].map((c) => <li>{c}</li>)}
+        </ul>
+      </div>
+      <figure class="hero-map">
+        <SystemsMap />
+        <figcaption class="mono faint">Fig 1 · {projects.length} systems across five domains. Select a node to open its case study.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec sec-line" aria-labelledby="id-h">
+    <div class="wrap">
+      <p class="chap"><b>02</b> Engineering identity</p>
+      <div class="grid">
+        <div class="c-5">
+          <img class="portrait" src="/mahmud.jpg" width="798" height="747" alt="Portrait of Mahmud Sani Madobi" loading="lazy" decoding="async" />
+        </div>
+        <div class="c-7">
+          <h2 id="id-h" class="rv">I build for the environments most software <span class="i">ignores.</span></h2>
+          <p class="lead rv" style="--i:1; margin-top: var(--s6)">Intermittent power, unreliable networks, and users who cannot afford a system that loses their money or their data. That constraint shapes every decision I make as an engineer and as a founder.</p>
+          <p class="muted rv" style="--i:2; margin-top: var(--s5); max-width: 62ch">I founded MeerTech Ltd to build and operate that kind of software. Today the company runs systems in production for mini-grid operators, exporters, a state agriculture programme and a national statistics agency, and I am responsible for how each one is designed.</p>
+        </div>
+      </div>
+      <ol class="principles">
+        {PRINCIPLES.map((p, i) => <li class="rv" style={`--i:${i % 3}`}><span class="mono faint">{String(i + 1).padStart(2, "0")}</span><h3>{p.name}</h3><p class="muted">{p.text}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec sec-alt" aria-labelledby="fp-h">
+    <div class="wrap">
+      <p class="chap"><b>03</b> Engineering footprint</p>
+      <div class="grid">
+        <div class="c-5">
+          <h2 id="fp-h">Counted, not <span class="i">claimed.</span></h2>
+          <p class="muted" style="margin-top: var(--s5); max-width: 46ch">The figures on the left are from this site's project records. The GitHub figures are read from the public API when the site is built; they cover public repositories only, and forks are counted as forks. Most of my production work is in private repositories and is not counted here.</p>
+          <p class="mono faint" style="margin-top: var(--s5)">GitHub measured {measured} · <a class="link" href={gh.profile} rel="me noopener">{gh.account}</a></p>
+        </div>
+        <div class="c-7">
+          <dl class="stats">
+            <div><dt>Systems in production</dt><dd>{countBy("production")}</dd></div>
+            <div><dt>Substantial systems, not yet in production</dt><dd>{countBy("substantial")}</dd></div>
+            <div><dt>Public repositories, original</dt><dd>{gh.originals}</dd></div>
+            <div><dt>Public repositories, forks</dt><dd>{gh.forks}</dd></div>
+          </dl>
+          <p class="label" style="margin-top: var(--s7)">Languages across public original repositories, by bytes</p>
+          <ul class="langs">
+            {gh.languages.slice(0, 5).map((l) => <li><span>{l.name}</span><span class="bar"><i style={`width:${Math.max(l.share, 1)}%`}></i></span><span class="mono">{l.share}%</span></li>)}
+          </ul>
+          <p class="label" style="margin-top: var(--s7)">Recently active public repositories</p>
+          <ul class="recent">
+            {gh.recent.map((r) => <li><a href={r.url} rel="noopener">{r.name}</a><span class="mono faint">{r.language ?? "n/a"} · {r.pushedAt}</span></li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="wk-h">
+    <div class="wrap">
+      <p class="chap"><b>04</b> Selected systems</p>
+      <div class="grid"><h2 id="wk-h" class="c-7">Six systems, each stated by <span class="i">status.</span></h2><p class="c-5 lead">Production means someone depends on it today. Anything else is called what it is.</p></div>
+      <ol class="work">
+        {featured.map((p, i) => (
+          <li class="rv">
+            <a href={`/work/${p.slug}`} data-sm-node={p.slug}>
+              <span class="mono faint work-n">{String(i + 1).padStart(2, "0")}</span>
+              <span class="work-b">
+                <span class="work-h"><span class="work-name serif">{p.name}</span><span class={`status status-${p.status}`}>{STATUS[p.status].label}</span></span>
+                <span class="work-t">{p.tagline}</span>
+                <span class="work-f mono faint">{p.flow.map((f) => f.stage).join(" → ")}</span>
+              </span>
+              <span class="arw" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <a class="tlink" href="/work">All {projects.length} systems, with their evidence <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="sec sec-alt" id="stack" aria-labelledby="st-h">
+    <div class="wrap">
+      <p class="chap"><b>05</b> Technology stack</p>
+      <div class="grid"><h2 id="st-h" class="c-7">A stack with <span class="i">receipts.</span></h2><p class="c-5 lead">Every technology below is tied to a system on this site that uses it. Select one to see where.</p></div>
+      <div class="stk" data-stack>
+        <div class="stk-groups">
+          {STACK.map((g) => (
+            <div class="stk-g">
+              <h3>{g.group}</h3>
+              <p class="muted">{g.line}</p>
+              <ul>{g.items.map((it) => <li><button class="stk-item" data-used={it.used.join(",")} data-name={it.name} aria-pressed="false">{it.name}<span class="mono">{it.used.length}</span></button></li>)}</ul>
+            </div>
+          ))}
+        </div>
+        <aside class="stk-side" aria-live="polite">
+          <p class="label label-mark" data-stk-title>Select a technology</p>
+          <p class="muted" data-stk-empty>Each item lists the systems that use it. Nothing is listed on the strength of a tutorial.</p>
+          <ul data-stk-list>
+            {projects.map((p) => <li data-slug={p.slug} hidden><a href={`/work/${p.slug}`}><span>{p.name}</span><span class={`status status-${p.status}`}>{STATUS[p.status].label}</span></a></li>)}
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="experience" aria-labelledby="xp-h">
+    <div class="wrap">
+      <p class="chap"><b>06</b> Experience</p>
+      <div class="grid">
+        <div class="c-4"><h2 id="xp-h">The <span class="i">path.</span></h2><p class="muted" style="margin-top: var(--s5)">Roles as I list them on LinkedIn. One employer is described instead of named.</p><a class="tlink" style="margin-top: var(--s6)" href="/resume">Résumé <span class="arw" aria-hidden="true">→</span></a></div>
+        <div class="c-8">
+          <ol class="tl">
+            {EXPERIENCE.map((r) => <li class="rv"><span class="mono faint">{r.when}</span><div><h3>{r.role}</h3><p class="tl-org">{r.org}{r.where ? ` · ${r.where}` : ""}</p><p class="muted">{r.note}</p></div></li>)}
+          </ol>
+          <div class="cred">
+            <div><p class="label">Education</p><ul>{EDUCATION.map((e) => <li><b>{e.what}</b><span class="muted">{e.where} · {e.when}</span></li>)}</ul></div>
+            <div><p class="label">Credentials and memberships</p><ul>{CREDENTIALS.map((e) => <li><b>{e.what}</b><span class="muted">{e.where} · {e.when}</span></li>)}{LEADERSHIP.map((e) => <li><b>{e.role}</b><span class="muted">{e.org} · {e.when}</span></li>)}</ul></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt" aria-labelledby="wr-h">
+    <div class="wrap">
+      <p class="chap"><b>07</b> Research and writing</p>
+      <div class="grid">
+        <div class="c-5"><h2 id="wr-h">Notes from systems that <span class="i">shipped.</span></h2>
+          <p class="muted" style="margin-top: var(--s5); max-width: 46ch">I write about engineering decisions I have had to live with. My research interests are deterministic boundaries for AI agents, ledgers for unreliable networks, offline-first sync, and geospatial decision support.</p>
+          <p class="muted" style="margin-top: var(--s4); max-width: 46ch">MeerTech also publishes field notes on reporting absence, forecasting and verifiable AI: <a class="link" href="https://www.meertech.tech/research" rel="noopener">meertech.tech/research</a>.</p>
+        </div>
+        <ol class="c-7 notes">
+          {notes.map((n) => <li class="rv"><a href={`/writing/${n.id}`}><span class="mono faint">{n.data.category} · {n.data.date.toLocaleDateString("en-GB", { month: "long", year: "numeric" })}</span><span class="notes-t serif">{n.data.title}</span><span class="muted">{n.data.description}</span></a></li>)}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec phil" aria-labelledby="ph-h">
+    <div class="wrap wrap-narrow">
+      <p class="chap"><b>08</b> Engineering philosophy</p>
+      <h2 id="ph-h" class="sr-only">Engineering philosophy</h2>
+      <blockquote class="serif rv">A system is not reliable because it rarely fails. It is reliable because, when it fails, it fails <span class="i">in a way you chose.</span></blockquote>
+      <div class="stack muted rv" style="--i:1; margin-top: var(--s7)">
+        <p>So I choose the failures first. A payment that is retried must find its own earlier result. A device that was offline for days must sync without overwriting newer truth. A model that is unsure must be refused by code that is not. A figure with no basis must be reported as missing.</p>
+        <p>I ship fast, with AI assistance, and then I earn the right to keep what I shipped: migrations, tests, continuous integration, and a status label that says exactly how far each system has got.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-line contact" id="contact" aria-labelledby="ct-h">
+    <div class="wrap grid">
+      <div class="c-7">
+        <p class="chap"><b>09</b> Contact</p>
+        <h2 id="ct-h">Let's build something that has to <span class="i">work.</span></h2>
+        <p class="lead" style="margin-top: var(--s6)">I am open to engineering roles and collaborations, AI research partnerships, speaking invitations, technical consulting and enterprise work through MeerTech.</p>
+        <div class="btn-row" style="margin-top: var(--s7)">
+          <a class="btn btn-primary" href={`mailto:${SITE.email}?subject=${encodeURIComponent("Hello Mahmud")}`}>Email me <span class="arw" aria-hidden="true">→</span></a>
+          <a class="btn" href={SITE.linkedin} rel="me noopener">LinkedIn</a>
+          <a class="btn" href={SITE.github} rel="me noopener">GitHub</a>
+        </div>
+      </div>
+      <dl class="c-5 rows ct-rows">
+        <div><dt>Engineering and research</dt><dd><a class="link" href={`mailto:${SITE.email}`}>{SITE.email}</a></dd></div>
+        <div><dt>Company projects</dt><dd><a class="link" href="https://www.meertech.tech/contact" rel="noopener">meertech.tech/contact</a></dd></div>
+        <div><dt>Based in</dt><dd>{SITE.location}. Working with teams worldwide.</dd></div>
+        <div><dt>Languages</dt><dd>English and Hausa</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <script>
+    import "../scene/boot";
+    const root = document.querySelector<HTMLElement>("[data-stack]");
+    if (root) {
+      const title = root.querySelector<HTMLElement>("[data-stk-title]")!, empty = root.querySelector<HTMLElement>("[data-stk-empty]")!;
+      const rows = [...root.querySelectorAll<HTMLElement>("[data-stk-list] > li")];
+      const btns = [...root.querySelectorAll<HTMLButtonElement>(".stk-item")];
+      btns.forEach((b) => b.addEventListener("click", () => {
+        const on = b.getAttribute("aria-pressed") !== "true";
+        btns.forEach((x) => x.setAttribute("aria-pressed", "false"));
+        b.setAttribute("aria-pressed", String(on));
+        const used = on ? b.dataset.used!.split(",") : [];
+        rows.forEach((r) => (r.hidden = !used.includes(r.dataset.slug!)));
+        title.textContent = on ? `${b.dataset.name} is used in` : "Select a technology";
+        empty.hidden = on;
+      }));
+    }
+  </script>
+</Base>
+<style>
+  .hero { padding-top: calc(var(--header-h) + clamp(32px, 6vw, 80px)); padding-bottom: clamp(40px, 6vw, 96px); overflow: clip; }
+  .hero-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+  .hero h1 { margin-top: var(--s5); font-size: clamp(3rem, 6.2vw + 0.6rem, 7rem); }
+  .hero .lead { margin-top: var(--s6); }
+  .hero .btn-row { margin-top: var(--s7); }
+  .hero-caps { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: var(--s7); padding-top: var(--s5); border-top: 1px solid var(--line); font-family: var(--mono); font-size: var(--t-micro); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .hero-map figcaption { margin-top: var(--s3); font-size: var(--t-micro); }
+  @media (max-width: 1000px) { .hero-in { grid-template-columns: 1fr; } }
+
+  .portrait { width: 100%; max-width: 440px; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(1) contrast(1.05); border: 1px solid var(--line-2); }
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: var(--s9); border-top: 1px solid var(--line-2); }
+  .principles li { padding: var(--s6) var(--s5) var(--s6) 0; border-bottom: 1px solid var(--line); display: grid; gap: var(--s3); align-content: start; }
+  .principles li:not(:nth-child(3n + 1)) { padding-left: var(--s5); border-left: 1px solid var(--line); }
+  .principles h3 { font-size: 1.3125rem; margin-top: var(--s4); }
+  .principles p { font-size: var(--t-small); }
+  @media (max-width: 900px) { .principles { grid-template-columns: 1fr; } .principles li:not(:nth-child(3n + 1)) { padding-left: 0; border-left: 0; } }
+
+  .stats { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line-2); }
+  .stats div { padding: var(--s5) var(--s4) var(--s5) 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column-reverse; gap: var(--s2); }
+  .stats dd { font-family: var(--serif); font-size: clamp(3rem, 6vw, 5rem); line-height: 0.9; }
+  .stats dt { font-size: var(--t-small); color: var(--ink-2); max-width: 22ch; }
+  .langs { margin-top: var(--s4); display: grid; gap: var(--s3); }
+  .langs li { display: grid; grid-template-columns: 110px 1fr 56px; gap: var(--s4); align-items: center; font-size: var(--t-small); }
+  .bar { height: 2px; background: var(--line); position: relative; }
+  .bar i { position: absolute; inset: 0 auto 0 0; background: var(--mark); }
+  .langs .mono { text-align: right; color: var(--ink-2); }
+  .recent { margin-top: var(--s3); border-top: 1px solid var(--line); }
+  .recent li { display: flex; justify-content: space-between; gap: var(--s4); padding: var(--s3) 0; border-bottom: 1px solid var(--line); font-size: var(--t-small); }
+  .recent a:hover { color: var(--mark); }
+
+  .work { margin: var(--s8) 0 var(--s7); border-top: 1px solid var(--line-2); }
+  .work a { display: grid; grid-template-columns: 56px 1fr auto; gap: var(--s4); padding: var(--s6) 0; border-bottom: 1px solid var(--line); align-items: start; transition: padding 300ms var(--ease), background 300ms; }
+  .work-n { padding-top: 14px; }
+  .work-b { display: grid; gap: var(--s2); }
+  .work-h { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s5); }
+  .work-name { font-size: clamp(2rem, 3.4vw + 0.8rem, 3.75rem); line-height: 1; }
+  .work-t { font-size: var(--t-lead); color: var(--ink-2); max-width: 56ch; }
+  .work-f { font-size: var(--t-micro); margin-top: var(--s2); }
+  .work .arw { padding-top: 18px; color: var(--ink-3); transition: transform 300ms var(--ease-out), color 300ms; }
+  .work a:hover { padding-left: var(--s4); background: var(--bg-2); }
+  .work a:hover .work-name { color: var(--mark); }
+  .work a:hover .arw { transform: translateX(6px); color: var(--mark); }
+  @media (max-width: 700px) { .work a { grid-template-columns: 1fr auto; } .work-n, .work-f { display: none; } }
+
+  .stk { display: grid; grid-template-columns: 1.7fr 1fr; gap: clamp(24px, 4vw, 64px); margin-top: var(--s8); align-items: start; }
+  .stk-groups { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7) var(--s6); }
+  .stk-g h3 { font-size: 1.25rem; }
+  .stk-g p { font-size: var(--t-small); margin-top: var(--s2); }
+  .stk-g ul { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--s4); }
+  .stk-item { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 12px; border: 1px solid var(--line-2); border-radius: 999px; font-size: var(--t-small); transition: all 160ms; }
+  .stk-item .mono { font-size: 0.625rem; color: var(--ink-3); }
+  .stk-item:hover { border-color: var(--ink); }
+  .stk-item[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .stk-item[aria-pressed="true"] .mono { color: var(--bg); }
+  .stk-side { position: sticky; top: calc(var(--header-h) + 24px); border: 1px solid var(--line-2); padding: var(--s5); background: var(--bg); min-height: 240px; }
+  .stk-side ul { margin-top: var(--s4); }
+  .stk-side li a { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); padding: var(--s3) 0; border-bottom: 1px solid var(--line); font-weight: 520; }
+  .stk-side li a:hover { color: var(--mark); }
+  .stk-side .muted { font-size: var(--t-small); margin-top: var(--s3); }
+  @media (max-width: 900px) { .stk { grid-template-columns: 1fr; } .stk-groups { grid-template-columns: 1fr; } .stk-side { position: static; } }
+
+  .tl { border-top: 1px solid var(--line-2); }
+  .tl li { display: grid; grid-template-columns: 130px 1fr; gap: var(--s5); padding: var(--s5) 0; border-bottom: 1px solid var(--line); }
+  .tl h3 { font-size: 1.3125rem; }
+  .tl-org { margin-top: 2px; }
+  .tl-org::first-letter { text-transform: uppercase; }
+  .tl .muted { font-size: var(--t-small); margin-top: var(--s2); max-width: 62ch; }
+  @media (max-width: 600px) { .tl li { grid-template-columns: 1fr; gap: var(--s2); } }
+  .cred { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); margin-top: var(--s8); }
+  .cred ul { margin-top: var(--s3); border-top: 1px solid var(--line); }
+  .cred li { display: grid; gap: 2px; padding: var(--s3) 0; border-bottom: 1px solid var(--line); font-size: var(--t-small); }
+  .cred b { font-weight: 560; font-size: var(--t-body); }
+  @media (max-width: 700px) { .cred { grid-template-columns: 1fr; } }
+
+  .notes { border-top: 1px solid var(--line-2); }
+  .notes a { display: grid; gap: var(--s2); padding: var(--s6) 0; border-bottom: 1px solid var(--line); transition: padding 300ms var(--ease); }
+  .notes-t { font-size: clamp(1.75rem, 2.2vw + 1rem, 2.75rem); line-height: 1.05; }
+  .notes a:hover { padding-left: var(--s4); } .notes a:hover .notes-t { color: var(--mark); }
+  .phil blockquote { font-size: clamp(2.25rem, 4.6vw + 0.8rem, 4.5rem); line-height: 1.04; }
+  .ct-rows { align-self: end; font-size: var(--t-small); }
+</style>
