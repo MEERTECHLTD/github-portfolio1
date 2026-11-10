@@ -6,7 +6,8 @@
 @font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap; src: url("/fonts/instrument-serif-italic.woff2") format("woff2"); }
 @font-face { font-family: "Geist"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("/fonts/geist-var.woff2") format("woff2-variations"); }
 @font-face { font-family: "Geist Mono"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("/fonts/geist-mono-var.woff2") format("woff2-variations"); }
-@font-face { font-family: "Serif Fallback"; src: local("Georgia"); size-adjust: 88%; ascent-override: 96%; descent-override: 24%; }
+/* Instrument Serif is much narrower than Georgia; the fallback is scaled so headlines wrap the same way before and after the swap. */
+@font-face { font-family: "Serif Fallback"; src: local("Georgia"), local("Times New Roman"); size-adjust: 79%; ascent-override: 108%; descent-override: 30%; line-gap-override: 0%; }
 
 :root {
   color-scheme: dark;
@@ -128,7 +129,7 @@ p { text-wrap: pretty; }
 .prose ol { padding-left: 1.3em; list-style: decimal; }
 .prose li + li { margin-top: 0.5em; }
 .prose blockquote { font-family: var(--serif); font-size: 1.75rem; line-height: 1.2; border-left: 2px solid var(--mark); padding-left: var(--s5); }
-.prose pre { background: var(--bg-2); border: 1px solid var(--line); padding: var(--s5); overflow-x: auto; font-family: var(--mono); font-size: 0.875rem; line-height: 1.6; border-radius: 6px; }
+.prose pre { background: var(--bg-2) !important; border: 1px solid var(--line); padding: var(--s5); overflow-x: auto; font-family: var(--mono); font-size: 0.875rem; line-height: 1.6; border-radius: 6px; }
 .prose code { font-family: var(--mono); font-size: 0.9em; }
 .prose :not(pre) > code { background: var(--bg-3); padding: 2px 6px; border-radius: 4px; }
 .prose strong { font-weight: 620; }
