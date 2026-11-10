@@ -1,0 +1,61 @@
+---
+/* The systems map. The SVG is drawn at build time from the same layout the
+   live engine uses, with a real link on every project node, so the figure is
+   complete without JavaScript or WebGL. */
+import { buildMap, project2d } from "../scene/layout";
+import { DOMAINS, STATUS, type Domain } from "../data/projects";
+interface Props { filters?: boolean }
+const { filters = false } = Astro.props;
+const W = 1000, H = 760;
+const { nodes, edges } = buildMap();
+const pts = nodes.map((n) => ({ ...n, ...project2d(n, W, H) }));
+const pinned = new Set(["ranawallet", "clearmind", "exportflow", "aditusos", "agricultural-intelligence", "meridian-books"]);
+const order = pts.map((_, i) => i).sort((a, b) => pts[b]!.depth - pts[a]!.depth);
+---
+<div class="sm" data-sm-host>
+  <svg class="sm-svg" viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby="sm-t sm-d">
+    <title id="sm-t">Map of the systems Mahmud Sani Madobi has built</title>
+    <desc id="sm-d">Seventeen systems drawn as nodes around five domain hubs: energy and IoT, financial infrastructure, AI and agents, data and geospatial, developer tooling. Systems that span two domains sit between their hubs. Each node links to its case study.</desc>
+    <g class="sm-edges">{edges.map((e) => <line x1={pts[e.a]!.x.toFixed(1)} y1={pts[e.a]!.y.toFixed(1)} x2={pts[e.b]!.x.toFixed(1)} y2={pts[e.b]!.y.toFixed(1)} class={e.primary ? "p" : ""} />)}</g>
+    {order.map((i) => { const n = pts[i]!; return n.kind === "hub"
+      ? <g class="sm-hub"><circle cx={n.x.toFixed(1)} cy={n.y.toFixed(1)} r="9" /><text x={n.x.toFixed(1)} y={(n.y - 18).toFixed(1)} text-anchor="middle">{n.label}</text></g>
+      : <a href={n.href} class={`sm-node s-${n.status}`}><circle cx={n.x.toFixed(1)} cy={n.y.toFixed(1)} r={(5 + n.r * 16).toFixed(1)} /><title>{n.label}: {n.statusLabel}</title></a>; })}
+  </svg>
+  <div class="sm-labels" aria-hidden="true">
+    {nodes.map((n) => <span class:list={["sm-label", { hub: n.kind === "hub" }]} data-sm-label={n.id} data-pin={pinned.has(n.id) ? "1" : undefined}>{n.label}</span>)}
+  </div>
+  <div class="sm-tip" data-sm-tip hidden><b data-n></b><span data-s class="mono"></span></div>
+</div>
+{filters && (
+  <div class="sm-filters" role="group" aria-label="Highlight a domain on the map">
+    {(Object.keys(DOMAINS) as Domain[]).map((d) => <button class="chipbtn" data-sm-filter={d} aria-pressed="false">{DOMAINS[d].label}</button>)}
+  </div>
+)}
+<ul class="sm-key" aria-label="Status key">
+  {(["production", "substantial", "functional", "prototype"] as const).map((s) => <li><span class={`status status-${s}`}>{STATUS[s].label}</span></li>)}
+</ul>
+<style is:global>
+  .sm { position: relative; width: 100%; aspect-ratio: 1000 / 760; }
+  .sm-svg { position: absolute; inset: 0; width: 100%; height: 100%; transition: opacity 600ms var(--ease); }
+  .sm-live .sm-svg { opacity: 0; pointer-events: none; }
+  .sm-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 600ms var(--ease); cursor: grab; }
+  .sm-live .sm-canvas { opacity: 1; }
+  .sm-edges line { stroke: var(--ink); stroke-opacity: 0.1; stroke-width: 1; }
+  .sm-edges line.p { stroke-opacity: 0.2; }
+  .sm-hub circle { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  .sm-hub text { fill: var(--ink-2); font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .sm-node circle { fill: var(--ink-3); stroke: var(--bg); stroke-width: 2; transition: fill 160ms; }
+  .sm-node.s-production circle { fill: var(--ok); } .sm-node.s-substantial circle { fill: var(--cool); }
+  .sm-node:hover circle, .sm-node:focus-visible circle { fill: var(--mark); }
+  .sm-labels { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 400ms; overflow: hidden; }
+  .sm-live .sm-labels { opacity: 1; }
+  .sm-label { position: absolute; top: 0; left: 0; translate: 14px -50%; white-space: nowrap; font-size: var(--t-small); font-weight: 520; opacity: 0; transition: opacity 200ms; will-change: transform; text-shadow: 0 0 12px var(--bg), 0 0 4px var(--bg); }
+  .sm-label.hub { font-family: var(--mono); font-size: var(--t-micro); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: var(--ink-2); translate: -50% -26px; }
+  .sm-label.on { opacity: 1; }
+  .sm-tip { position: absolute; top: 0; left: 0; pointer-events: none; display: none; }
+  .sm-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--s5); }
+  .chipbtn { font-family: var(--mono); font-size: var(--t-micro); letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--line-2); border-radius: 999px; padding: 0 14px; min-height: 36px; color: var(--ink-2); transition: all 160ms; }
+  .chipbtn:hover { color: var(--ink); border-color: var(--ink); }
+  .chipbtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .sm-key { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--s4); }
+</style>

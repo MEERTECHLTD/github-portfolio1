@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { bySlug, STATUS } from "../../data/projects";
+import { article } from "../../lib/seo";
+export async function getStaticPaths() { return (await getCollection("writing")).map((entry) => ({ params: { slug: entry.id }, props: { entry } })); }
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data, path = `/writing/${entry.id}`, date = d.date.toISOString().slice(0, 10);
+const words = (entry.body ?? "").split(/\s+/).length;
+const crumbs = [{ name: "Home", href: "/" }, { name: "Writing", href: "/writing" }, { name: d.title, href: path }];
+const systems = d.systems.map((s) => bySlug[s]).filter(Boolean);
+---
+<Base title={`${d.title} | Mahmud Sani Madobi`.length <= 70 ? `${d.title} | Mahmud Sani Madobi` : d.title} description={d.description} og={`writing-${entry.id}`} crumbs={crumbs} ogType="article" published={date} schema={[article({ path, title: d.title, description: d.description, date, words })]}>
+  <section class="phero"><div class="wrap wrap-narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/writing">Writing</a></li><li aria-current="page">{d.category}</li></ol>
+    <h1 style="font-size: clamp(2.5rem, 5vw + 0.8rem, 5rem); max-width: 18ch">{d.title}</h1>
+    <p class="lead">{d.description}</p>
+    <p class="mono faint" style="margin-top: var(--s6); font-size: var(--t-micro)">Mahmud Sani Madobi · <time datetime={date}>{d.date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</time> · {Math.max(2, Math.round(words / 220))} min read</p>
+  </div></section>
+  <article class="sec"><div class="wrap wrap-narrow">
+    <div class="prose"><Content /></div>
+    {systems.length > 0 && <aside class="sys"><p class="label">Systems mentioned</p><ul>{systems.map((p) => <li><a href={`/work/${p!.slug}`}><span>{p!.name}</span><span class={`status status-${p!.status}`}>{STATUS[p!.status].label}</span></a></li>)}</ul></aside>}
+  </div></article>
+</Base>
+<style>
+  .sys { margin-top: var(--s9); padding-top: var(--s5); border-top: 1px solid var(--line-2); }
+  .sys ul { margin-top: var(--s3); }
+  .sys a { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); padding: var(--s3) 0; border-bottom: 1px solid var(--line); font-weight: 520; }
+  .sys a:hover { color: var(--mark); }
+</style>

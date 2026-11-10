@@ -1,82 +1,47 @@
-# GitHub Portfolio 🚀
+# sm.meertech.tech
 
-## Project Description 📄
+The personal site of Mahmud Sani Madobi: AI systems engineer, software architect, founder and CEO of MeerTech Ltd.
 
-This project is a portfolio showcasing various projects and contributions on GitHub. It includes detailed descriptions, code snippets, and links to repositories.
+A static Astro site. Every page is HTML at build time. The interactive 3D systems map is a separate chunk that loads after the page is usable, and an SVG version of the same map is in the page for every case where WebGL is not.
 
-## Features ✨
+## Commands
 
-- Project descriptions
-- Code snippets
-- Links to GitHub repositories
+| Command | What it does |
+|---|---|
+| `npm run dev` | Local development |
+| `npm run build` | Refresh the GitHub snapshot, then build into `dist/` |
+| `npm run check` | Strict type check |
+| `npm test` | 17 checks on the built site |
+| `npm run verify` | check, build, test. Run before merging |
 
-## Technical Skills 🛠️
+## Deploying
 
-- **Languages:** Java, JavaScript, Python
-- **Frameworks:** React, Node.js, Express.js, Django, TensorFlow, Keras, Mindspore
-- **Databases:** MongoDB, MySQL
-- **Tools & Platforms:** Git, Docker, Heroku, Vercel, AWS, Nginx
-- **Other:** Machine Learning, Deep Learning, CNN, RESTful APIs, Agile/Scrum, CI/CD, TDD
+`main` is the production branch. Vercel (project `portfolio`, team `meertech`) builds and deploys every push to `main` to https://sm.meertech.tech. Work on a branch, open a pull request, merge.
 
-## Professional Experience 💼
+## Where things are
 
-### Software Development Intern
+| Path | What it is |
+|---|---|
+| `src/data/projects.ts` | Every system: status, summary, problem, architecture pipeline, decisions, security, evidence |
+| `src/data/site.ts` | Identity, experience, education, credentials, stack |
+| `src/data/github.json` | Public GitHub footprint, measured by `scripts/github.mjs` before each build |
+| `src/content/writing/*.md` | Engineering notes |
+| `src/scene/` | The systems map: `layout.ts` (positions, shared by the SVG and the engine), `engine.ts` (three.js), `boot.ts` (lazy loader) |
+| `src/lib/seo.ts` | JSON-LD: Person, ProfilePage, WebSite, BreadcrumbList, SoftwareApplication or CreativeWork, TechArticle |
+| `scripts/tests/site.test.mjs` | The checks |
 
-**Blue Sapphire Hub – Kano, Nigeria**
+## Rules this site keeps
 
-- Troubleshot, debugged, maintained, and improved existing software according to customer and department requests.
-- Trained and furthered knowledge of the most in-demand programming skills.
-- Compiled and assessed customer feedback to make improvement recommendations.
-- Wrote and maintained accurate technical documentation.
-- Identified potential liabilities and made recommendations to resolve issues.
-- Performed routine maintenance and backup of software programs.
+1. **Status comes from evidence.** Production means in use today. Substantial, functional and prototype mean what `src/data/projects.ts` says they mean. Nothing is upgraded ahead of the evidence, and each project page states its evidence.
+2. **Some organisations are described, not named.** The tests fail the build if a name on the do-not-name list appears.
+3. **No invented numbers.** GitHub figures are measured from public endpoints and dated. Forks are counted as forks. Private repositories are not counted.
+4. **No personal phone number.** Contact is by email, LinkedIn and GitHub.
+5. **No em dashes.**
 
-## Education 🎓
+## The GitHub snapshot
 
-- **ALX Africa Software Engineering Program**
-  - Remote | January 2025
-  - Hands-on experience in full-stack development and software engineering.
-- **Bachelor of Science in Computer Science and Information Technology**
-  - Federal University Dutsinma | December 2023
-- **Java Programming Certification**
-  - Aptech Computer Education | November 2022
+`scripts/github.mjs` reads public REST endpoints (no token needed; set `GITHUB_TOKEN` in the build environment to raise the rate limit). If GitHub is unreachable or rate limited, the committed snapshot is kept and the page shows the date it was measured.
 
-## Certifications 📜
+## Regenerating the résumé PDF
 
-- HCIA AI – Huawei – September 2024
-- HCIA Datacom – Huawei – November 2023
-- Java Programming – Aptech Computer Education – November 2022
-
-## Languages 🌐
-
-- **English:** Fluent
-- **Hausa:** Fluent
-
-## Installation ⚙️
-
-To run this project locally, follow these steps:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/github-portfolio.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd github-portfolio
-   ```
-
-## Usage 📂
-
-Open the `index.html` file in your web browser to view the portfolio.
-
-## Contributing 🤝
-
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
-
-## License 📄
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact 📧
-
-For any questions or feedback, please contact [meertech](mailto:meertech@mail.ru).
+`public/mahmud-sani-madobi-resume.pdf` is the `/resume` page printed to A4. After changing the résumé data, open `/resume` in a browser, print to PDF and replace the file.

@@ -1,0 +1,75 @@
+{
+  "measuredAt": "2026-11-10",
+  "account": "MEERTECHLTD",
+  "profile": "https://github.com/MEERTECHLTD",
+  "publicRepos": 54,
+  "originals": 21,
+  "originalsWithCode": 17,
+  "forks": 33,
+  "followers": 17,
+  "stars": 5,
+  "languages": [
+    {
+      "name": "TypeScript",
+      "share": 69
+    },
+    {
+      "name": "Python",
+      "share": 15.5
+    },
+    {
+      "name": "JavaScript",
+      "share": 12.9
+    },
+    {
+      "name": "HTML",
+      "share": 1
+    },
+    {
+      "name": "CSS",
+      "share": 1
+    },
+    {
+      "name": "Go",
+      "share": 0.5
+    }
+  ],
+  "recent": [
+    {
+      "name": "ClearMind",
+      "url": "https://github.com/MEERTECHLTD/ClearMind",
+      "language": "TypeScript",
+      "pushedAt": "2026-11-07"
+    },
+    {
+      "name": "nif-portal",
+      "url": "https://github.com/MEERTECHLTD/nif-portal",
+      "language": "Go",
+      "pushedAt": "2026-07-24"
+    },
+    {
+      "name": "ai-interview-generator",
+      "url": "https://github.com/MEERTECHLTD/ai-interview-generator",
+      "language": "JavaScript",
+      "pushedAt": "2026-05-13"
+    },
+    {
+      "name": "Agentic-Wallets-for-AI-Agents",
+      "url": "https://github.com/MEERTECHLTD/Agentic-Wallets-for-AI-Agents",
+      "language": "JavaScript",
+      "pushedAt": "2026-02-19"
+    },
+    {
+      "name": "PUEAI",
+      "url": "https://github.com/MEERTECHLTD/PUEAI",
+      "language": "JavaScript",
+      "pushedAt": "2025-12-22"
+    },
+    {
+      "name": "brandforge",
+      "url": "https://github.com/MEERTECHLTD/brandforge",
+      "language": "TypeScript",
+      "pushedAt": "2025-09-15"
+    }
+  ]
+}

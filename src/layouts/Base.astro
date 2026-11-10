@@ -1,0 +1,126 @@
+---
+import "../styles/global.css";
+import { SITE, NAV } from "../data/site";
+import { abs, graph, person, website, webPage, breadcrumbs, type Crumb } from "../lib/seo";
+interface Props { title: string; description: string; og?: string; crumbs?: Crumb[]; pageType?: string; schema?: object[]; noindex?: boolean; ogType?: "website" | "article" | "profile"; published?: string }
+const { title, description, og = "home", crumbs, pageType, schema = [], noindex = false, ogType = "website", published } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const canonical = abs(path);
+const img = `${SITE.origin}/og/${og}.png`;
+const ld = graph(person(), website(), webPage({ path, title, description, type: pageType }), crumbs && crumbs.length > 1 ? breadcrumbs(path, crumbs) : null, ...schema);
+const active = (href: string) => !href.includes("#") && (path === href || path.startsWith(href + "/"));
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.name} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1"} />
+    <meta name="theme-color" content="#0a0b0f" />
+    <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/geist-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={img} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    {published && <meta property="article:published_time" content={published} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={img} />
+    <link rel="me" href={SITE.github} />
+    <link rel="me" href={SITE.linkedin} />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Plain-text profile" />
+    <script type="application/ld+json" set:html={ld} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="hdr" data-header>
+      <div class="wrap hdr-in">
+        <a class="hdr-name" href="/" aria-label={`${SITE.name}, home`}><span class="hdr-dot" aria-hidden="true"></span>{SITE.short}</a>
+        <nav aria-label="Primary" class="hdr-nav">
+          <ul>{NAV.map((n) => <li><a href={n.href} aria-current={active(n.href) ? "page" : undefined}>{n.label}</a></li>)}</ul>
+        </nav>
+        <a class="btn hdr-cta" href="/#contact">Let's collaborate</a>
+        <button class="burger" data-burger aria-expanded="false" aria-controls="drawer" aria-label="Menu"><span></span><span></span></button>
+      </div>
+      <nav class="drawer" id="drawer" aria-label="Mobile" hidden>
+        <ul class="wrap">{NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}<li><a href="/#contact">Contact</a></li></ul>
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="ftr">
+      <div class="wrap">
+        <p class="ftr-big serif">Systems that <span class="i">hold up</span> in the real world.</p>
+        <div class="ftr-grid">
+          <div><p class="label">Mahmud Sani Madobi</p><p class="muted">{SITE.role}. {SITE.title}. {SITE.location}.</p></div>
+          <nav aria-label="Site"><p class="label">Site</p><ul>{NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul></nav>
+          <nav aria-label="Elsewhere"><p class="label">Elsewhere</p><ul>
+            <li><a href={SITE.github} rel="me noopener">GitHub</a></li>
+            <li><a href={SITE.linkedin} rel="me noopener">LinkedIn</a></li>
+            <li><a href={SITE.company} rel="noopener">MeerTech Ltd</a></li>
+            <li><a href={`mailto:${SITE.email}`}>Email</a></li>
+          </ul></nav>
+        </div>
+        <p class="ftr-base mono faint">© {year} {SITE.name} · Every status on this site is stated from evidence · <a href="/sitemap.xml">Sitemap</a></p>
+      </div>
+    </footer>
+    <script>
+      const hdr = document.querySelector<HTMLElement>("[data-header]");
+      const onScroll = () => hdr?.classList.toggle("stuck", scrollY > 8);
+      onScroll(); addEventListener("scroll", onScroll, { passive: true });
+      const burger = document.querySelector<HTMLButtonElement>("[data-burger]"), drawer = document.getElementById("drawer");
+      const set = (open: boolean) => { if (!burger || !drawer) return; drawer.hidden = !open; burger.setAttribute("aria-expanded", String(open)); hdr?.classList.toggle("open", open); };
+      burger?.addEventListener("click", () => set(burger.getAttribute("aria-expanded") !== "true"));
+      drawer?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => set(false)));
+      addEventListener("keydown", (e) => { if (e.key === "Escape") set(false); });
+      const rv = document.querySelectorAll(".rv");
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) rv.forEach((e) => e.classList.add("in"));
+      else { const io = new IntersectionObserver((en) => en.forEach((x) => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { rootMargin: "0px 0px -8% 0px", threshold: 0.05 }); rv.forEach((e) => io.observe(e)); }
+    </script>
+  </body>
+</html>
+<style is:global>
+  .hdr { position: fixed; inset: 0 0 auto 0; z-index: 100; height: var(--header-h); border-bottom: 1px solid transparent; transition: background 260ms var(--ease), border-color 260ms var(--ease); }
+  .hdr.stuck, .hdr.open { background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom-color: var(--line); }
+  .hdr-in { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--s5); }
+  .hdr-name { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.01em; min-height: 44px; }
+  .hdr-dot { width: 9px; height: 9px; background: var(--mark); border-radius: 50%; }
+  .hdr-nav ul { display: flex; gap: clamp(12px, 2.4vw, 34px); }
+  .hdr-nav a { font-size: 0.9375rem; color: var(--ink-2); padding: 12px 2px; transition: color 160ms; }
+  .hdr-nav a:hover, .hdr-nav a[aria-current] { color: var(--ink); }
+  .hdr-nav a[aria-current] { box-shadow: inset 0 -1px 0 var(--mark); }
+  .hdr-cta { min-height: 42px; padding: 0 18px; }
+  .burger { display: none; width: 44px; height: 44px; position: relative; border: 1px solid var(--line); border-radius: 50%; }
+  .burger span { position: absolute; left: 13px; right: 13px; height: 1.5px; background: var(--ink); transition: transform 240ms var(--ease), top 240ms var(--ease); }
+  .burger span:first-child { top: 17px; } .burger span:last-child { top: 25px; }
+  .burger[aria-expanded="true"] span:first-child { top: 21px; transform: rotate(45deg); }
+  .burger[aria-expanded="true"] span:last-child { top: 21px; transform: rotate(-45deg); }
+  .drawer { position: fixed; inset: var(--header-h) 0 0 0; background: var(--bg); padding-top: var(--s5); overflow-y: auto; }
+  .drawer a { display: flex; align-items: center; min-height: 64px; font-family: var(--serif); font-size: 2.25rem; border-bottom: 1px solid var(--line); }
+  @media (max-width: 860px) { .hdr-nav, .hdr-cta { display: none; } .burger { display: block; } }
+  .ftr { border-top: 1px solid var(--line); padding-block: var(--s9) var(--s6); }
+  .ftr-big { font-size: clamp(2.5rem, 7vw, 6.5rem); line-height: 0.98; max-width: 14ch; }
+  .ftr-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--s7); margin-top: var(--s9); font-size: var(--t-small); }
+  .ftr-grid .label { margin-bottom: var(--s3); }
+  .ftr-grid .muted { max-width: 38ch; }
+  .ftr-grid li a { display: inline-flex; min-height: 32px; align-items: center; color: var(--ink-2); }
+  .ftr-grid li a:hover { color: var(--ink); }
+  .ftr-base { margin-top: var(--s8); padding-top: var(--s5); border-top: 1px solid var(--line); font-size: var(--t-micro); }
+  .ftr-base a { text-decoration: underline; }
+  @media (max-width: 700px) { .ftr-grid { grid-template-columns: 1fr 1fr; } .ftr-grid > div { grid-column: 1 / -1; } }
+</style>
